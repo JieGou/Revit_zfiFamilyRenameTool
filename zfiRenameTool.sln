@@ -1,6 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModPlusRenamer", "ModPlusRenamer\ModPlusRenamer.csproj", "{CB1129F4-1EF1-4EB8-926E-59C71660BA7F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zfiRenameTool", "zfiRenameTool\zfiRenameTool.csproj", "{CB1129F4-1EF1-4EB8-926E-59C71660BA7F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{CD29B8D9-87F5-4DA9-AA35-BF5684B3F44B}"
+ProjectSection(SolutionItems) = preProject
+	ModPlus.ruleset = ModPlus.ruleset
+EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
