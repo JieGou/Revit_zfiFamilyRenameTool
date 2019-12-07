@@ -65,7 +65,7 @@ namespace VmTests
             var renameable = GetRenameable(source);
 
             var optionsVm = new OptionsVm { Find = find };
-            optionsVm.OptionCheckedCmd.Execute("StartWith");
+            optionsVm.OptionCheckedCmd.Execute(nameof(RenameOption.StartWith));
             var action = optionsVm.Rename;
             action(renameable);
 
@@ -82,7 +82,7 @@ namespace VmTests
             var renameable = GetRenameable(source);
 
             var optionsVm = new OptionsVm { Find = find };
-            optionsVm.OptionCheckedCmd.Execute("EndWith");
+            optionsVm.OptionCheckedCmd.Execute(nameof(RenameOption.EndWith));
             var action = optionsVm.Rename;
             action(renameable);
 
@@ -99,7 +99,7 @@ namespace VmTests
             var renameable = GetRenameable(source);
 
             var optionsVm = new OptionsVm { Find = find };
-            optionsVm.OptionCheckedCmd.Execute("Contains");
+            optionsVm.OptionCheckedCmd.Execute(nameof(RenameOption.Contains));
             var action = optionsVm.Rename;
             action(renameable);
 
@@ -116,7 +116,7 @@ namespace VmTests
             var renameable = GetRenameable(source);
 
             var optionsVm = new OptionsVm { Find = find, ReplaceValue = result };
-            optionsVm.OptionCheckedCmd.Execute("MatchesWhole");
+            optionsVm.OptionCheckedCmd.Execute(nameof(RenameOption.MatchesWhole));
             var action = optionsVm.Rename;
             action(renameable);
 
@@ -133,7 +133,7 @@ namespace VmTests
             var renameable = GetRenameable(source);
 
             var optionsVm = new OptionsVm { Find = find };
-            optionsVm.OptionCheckedCmd.Execute("Regex");
+            optionsVm.OptionCheckedCmd.Execute(nameof(RenameOption.Regex));
             var action = optionsVm.Rename;
             action(renameable);
 
@@ -150,7 +150,7 @@ namespace VmTests
             var renameable = GetRenameable(source);
 
             var optionsVm = new OptionsVm { Find = find, IsCaseSensitive = true };
-            optionsVm.OptionCheckedCmd.Execute("Contains");
+            optionsVm.OptionCheckedCmd.Execute(nameof(RenameOption.Contains));
             var action = optionsVm.Rename;
             action(renameable);
 
@@ -169,7 +169,7 @@ namespace VmTests
             var renameable = GetRenameable(source);
 
             var optionsVm = new OptionsVm { Find = find, IsCaseSensitive = true, Prefix = prefix, Suffix = suffix };
-            optionsVm.OptionCheckedCmd.Execute("Contains");
+            optionsVm.OptionCheckedCmd.Execute(nameof(RenameOption.Contains));
             var action = optionsVm.Rename;
             action(renameable);
 
