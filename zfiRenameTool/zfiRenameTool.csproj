@@ -5,6 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{CB1129F4-1EF1-4EB8-926E-59C71660BA7F}</ProjectGuid>
+    <ProjectTypeGuids>{60DC8134-EBA5-43B8-BCC9-BB4BC16C2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>zfiRenameTool</RootNamespace>
@@ -13,7 +14,7 @@
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -21,15 +22,19 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\zfiRenameTool.xml</DocumentationFile>
+    <NoWarn>CS1591</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\zfiRenameTool.xml</DocumentationFile>
+    <NoWarn>CS1591</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -42,27 +47,29 @@
     <Compile Include="Abstractions\IRenameableProvider.cs" />
     <Compile Include="Exceptions\PluginException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Revit\FamilyParametersProvider.cs" />
-    <Compile Include="Revit\FamilyParameterWrapper.cs" />
+    <Compile Include="Revit\App.cs" />
+    <Compile Include="Revit\RenamerCmd.cs" />
     <Compile Include="Revit\RevitEvent.cs" />
+    <Compile Include="Services\FamilyParametersProvider.cs" />
+    <Compile Include="Services\FamilyParameterWrapper.cs" />
+    <Compile Include="Services\RevitService.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BimLab.Revit.Api.2019" Version="1.0.1" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Services" />
+    <Folder Include="View" />
   </ItemGroup>
   <PropertyGroup>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <CodeAnalysisRuleSet>$(SolutionDirectory)/ModPlus.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>$(SolutionDir)\ModPlus.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-           Other similar extension points exist, see Microsoft.Common.targets.
-      <Target Name="BeforeBuild">
-      </Target>
-      <Target Name="AfterBuild">
-      </Target>
-      -->
+               Other similar extension points exist, see Microsoft.Common.targets.
+          <Target Name="BeforeBuild">
+          </Target>
+          <Target Name="AfterBuild">
+          </Target>
+          -->
 </Project>
