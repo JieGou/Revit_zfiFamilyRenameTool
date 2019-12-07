@@ -47,6 +47,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstractions\ICloseable.cs" />
     <Compile Include="Abstractions\IRenameable.cs" />
     <Compile Include="Abstractions\IRenameableProvider.cs" />
     <Compile Include="Exceptions\PluginException.cs" />
@@ -57,6 +58,15 @@
     <Compile Include="Services\FamilyParametersProvider.cs" />
     <Compile Include="Services\FamilyParameterWrapper.cs" />
     <Compile Include="Services\RevitService.cs" />
+    <Compile Include="ViewModel\BodyVm.cs" />
+    <Compile Include="ViewModel\MainVm.cs" />
+    <Compile Include="ViewModel\OptionsVm.cs" />
+    <Compile Include="ViewModel\RenameableVm.cs" />
+    <Compile Include="ViewModel\RenameOption.cs" />
+    <Compile Include="ViewModel\TabVm.cs" />
+    <Compile Include="View\Body.xaml.cs">
+      <DependentUpon>Body.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Options.xaml.cs">
       <DependentUpon>Options.xaml</DependentUpon>
     </Compile>
@@ -66,10 +76,11 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BimLab.Revit.Api.2019" Version="1.0.1" />
+    <PackageReference Include="Micro_MVVM" Version="1.0.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="View\Main.xaml" />
+    <Page Include="View\Body.xaml" />
     <Page Include="View\Options.xaml" />
     <Page Include="View\RenamerWindow.xaml" />
   </ItemGroup>

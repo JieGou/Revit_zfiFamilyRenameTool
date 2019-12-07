@@ -5,6 +5,8 @@ namespace zfiRenameTool.Revit
     using Autodesk.Revit.DB;
     using Autodesk.Revit.UI;
     using Services;
+    using View;
+    using ViewModel;
     using zfiRenameTool.Exceptions;
 
     [Transaction(TransactionMode.Manual)]
@@ -19,6 +21,12 @@ namespace zfiRenameTool.Revit
                 var app = commandData.Application.Application;
                 var revitEvent = new RevitEvent();
                 var revitService = new RevitService(app, revitEvent);
+                var mainVm = new MainVm(revitService);
+                var renamerWindow = new RenamerWindow()
+                {
+                    DataContext = mainVm
+                };
+                renamerWindow.Show();
             }
             catch (PluginException e)
             {

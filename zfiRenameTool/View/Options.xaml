@@ -4,7 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:zfiRenameTool.View"
-             mc:Ignorable="d" MinWidth="150" Margin="5">
+             xmlns:vm="clr-namespace:zfiRenameTool.ViewModel"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=vm:OptionsVm, IsDesignTimeCreatable=False}"
+             MinWidth="150" Margin="5">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -44,8 +47,8 @@
                 <Label Grid.Row="0" Grid.Column="0" Content="Префикс:" />
                 <Label Grid.Row="1" Grid.Column="0" Content="Суффикс:" />
 
-                <TextBox Grid.Row="0" Grid.Column="1" />
-                <TextBox Grid.Row="1" Grid.Column="1" />
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Prefix, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Suffix, UpdateSourceTrigger=PropertyChanged}" />
             </Grid>
         </GroupBox>
 
@@ -63,17 +66,33 @@
                     <Label Grid.Row="0" Grid.Column="0" Content="Найти:" />
                     <Label Grid.Row="1" Grid.Column="0" Content="Заменить на:" />
 
-                    <TextBox Grid.Row="0" Grid.Column="1" />
-                    <TextBox Grid.Row="1" Grid.Column="1" />
+                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Find, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBox Grid.Row="1" Grid.Column="1"
+                             Text="{Binding ReplaceValue, UpdateSourceTrigger=PropertyChanged}" />
                 </Grid>
-                
-                <CheckBox>Не учитывать регистр</CheckBox>
-                
-                <RadioButton>Начинается с </RadioButton>
-                <RadioButton IsChecked="True">Заканчивается на</RadioButton>
-                <RadioButton>Содержит</RadioButton>
-                <RadioButton>Полное совпадение</RadioButton>
-                <RadioButton>Регулярное выражение</RadioButton>
+
+                <CheckBox IsChecked="{Binding IsCaseSensitive}">Не учитывать регистр</CheckBox>
+
+                <RadioButton IsChecked="True" Command="{Binding OptionCheckedCmd}"
+                             CommandParameter="StartWith">
+                    Начинается с
+                </RadioButton>
+                <RadioButton Command="{Binding OptionCheckedCmd}"
+                             CommandParameter="EndWith">
+                    Заканчивается на
+                </RadioButton>
+                <RadioButton Command="{Binding OptionCheckedCmd}"
+                             CommandParameter="Contains">
+                    Содержит
+                </RadioButton>
+                <RadioButton Command="{Binding OptionCheckedCmd}"
+                             CommandParameter="MatchesWhole">
+                    Полное совпадение
+                </RadioButton>
+                <RadioButton Command="{Binding OptionCheckedCmd}"
+                             CommandParameter="Regex">
+                    Регулярное выражение
+                </RadioButton>
             </StackPanel>
         </GroupBox>
     </Grid>

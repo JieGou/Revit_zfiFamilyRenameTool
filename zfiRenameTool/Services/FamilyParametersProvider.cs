@@ -21,7 +21,7 @@ namespace zfiRenameTool.Services
 
             foreach (FamilyParameter p in fm.Parameters)
             {
-                if (p.IsShared)
+                if (p.IsShared || p.IsReadOnly || p.Id.IntegerValue < 0)
                 {
                     continue;
                 }
