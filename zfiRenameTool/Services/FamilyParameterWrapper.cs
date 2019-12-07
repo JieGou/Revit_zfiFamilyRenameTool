@@ -1,4 +1,4 @@
-namespace zfiRenameTool.Revit
+namespace zfiRenameTool.Services
 {
     using Abstractions;
     using Autodesk.Revit.DB;
@@ -15,7 +15,9 @@ namespace zfiRenameTool.Revit
         }
 
         public string Title => "Параметр";
+
         public string Source => _parameter.Definition.Name;
+
         public string Destination { get; set; } = string.Empty;
 
         public void Rename()

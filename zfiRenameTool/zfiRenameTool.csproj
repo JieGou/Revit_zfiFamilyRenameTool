@@ -37,10 +37,14 @@
     <NoWarn>CS1591</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstractions\IRenameable.cs" />
@@ -53,13 +57,21 @@
     <Compile Include="Services\FamilyParametersProvider.cs" />
     <Compile Include="Services\FamilyParameterWrapper.cs" />
     <Compile Include="Services\RevitService.cs" />
+    <Compile Include="View\Options.xaml.cs">
+      <DependentUpon>Options.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RenamerWindow.xaml.cs">
+      <DependentUpon>RenamerWindow.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BimLab.Revit.Api.2019" Version="1.0.1" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="View" />
+    <Page Include="View\Main.xaml" />
+    <Page Include="View\Options.xaml" />
+    <Page Include="View\RenamerWindow.xaml" />
   </ItemGroup>
   <PropertyGroup>
     <CodeAnalysisRuleSet>$(SolutionDir)\ModPlus.ruleset</CodeAnalysisRuleSet>

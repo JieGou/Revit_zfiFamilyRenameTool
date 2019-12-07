@@ -1,9 +1,10 @@
-namespace zfiRenameTool.Revit
+namespace zfiRenameTool.Services
 {
     using System.Collections.Generic;
     using Abstractions;
     using Autodesk.Revit.DB;
     using Exceptions;
+    using Revit;
 
     public class FamilyParametersProvider : IRenameableProvider
     {
