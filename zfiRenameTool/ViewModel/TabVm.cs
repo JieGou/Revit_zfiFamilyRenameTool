@@ -56,10 +56,9 @@ namespace zfiRenameTool.ViewModel
 
         private void OptionsVmOnPropertyChanged()
         {
-            foreach (var renameableVm in Renameables.Where(x => x.IsChecked))
-            {
-                _optionsVm.Rename(renameableVm);
-            }
+            Renameables.Where(x => x.IsChecked)
+                .ToList()
+                .ForEach(_optionsVm.Rename);
         }
     }
 }
