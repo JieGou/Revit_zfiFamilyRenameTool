@@ -59,6 +59,9 @@
     <Compile Include="Services\FamilyParameterWrapper.cs" />
     <Compile Include="Services\RevitService.cs" />
     <Compile Include="ViewModel\BodyVm.cs" />
+    <Compile Include="ViewModel\Converters\BoolToColorConverter.cs" />
+    <Compile Include="ViewModel\LogMessage.cs" />
+    <Compile Include="ViewModel\LogWindowVm.cs" />
     <Compile Include="ViewModel\MainVm.cs" />
     <Compile Include="ViewModel\OptionsVm.cs" />
     <Compile Include="ViewModel\RenameableVm.cs" />
@@ -66,6 +69,9 @@
     <Compile Include="ViewModel\TabVm.cs" />
     <Compile Include="View\Body.xaml.cs">
       <DependentUpon>Body.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LogWindow.xaml.cs">
+      <DependentUpon>LogWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Options.xaml.cs">
       <DependentUpon>Options.xaml</DependentUpon>
@@ -82,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="View\Body.xaml" />
+    <Page Include="View\LogWindow.xaml" />
     <Page Include="View\Options.xaml" />
     <Page Include="View\RenamerWindow.xaml" />
   </ItemGroup>

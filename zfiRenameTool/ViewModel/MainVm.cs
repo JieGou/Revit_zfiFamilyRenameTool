@@ -1,12 +1,14 @@
 namespace zfiRenameTool.ViewModel
 {
     using System;
+    using System.Collections.Generic;
     using System.Windows;
     using System.Windows.Input;
     using Abstractions;
     using MicroMvvm;
     using Microsoft.Win32;
     using Services;
+    using View;
 
     public class MainVm : ViewModelBase
     {
@@ -19,7 +21,7 @@ namespace zfiRenameTool.ViewModel
             Options = new OptionsVm();
         }
 
-        public ICommand ApplyCmd => new RelayCommand(Apply);
+        public ICommand ApplyCmd => new RelayCommand(ApplyAndShowLogs);
 
         public ICommand CloseCmd => new RelayCommand<ICloseable>(Close);
 
@@ -53,7 +55,8 @@ namespace zfiRenameTool.ViewModel
             }
             else
             {
-                MessageBox.Show("Не выбранно ни одного файла семейства!", "Внимание!");
+                MessageBox.Show("Не выбранно ни одного файла семейства!", "Внимание!", MessageBoxButton.OK,
+                    MessageBoxImage.Information);
             }
         }
 
@@ -61,6 +64,7 @@ namespace zfiRenameTool.ViewModel
         {
             _service.Renamed += (s, e) =>
             {
+                LogWindow.ShowLogs(e);
                 _service.SaveAllDocs(_body.Docs);
                 Close(closeable);
             };
@@ -73,6 +77,12 @@ namespace zfiRenameTool.ViewModel
             Body?.Dispose();
         }
 
+        private void ApplyAndShowLogs()
+        {
+            _service.Renamed += SaveAnShowLogs;
+            Apply();
+        }
+
         private void Apply()
         {
             var renameables = Body.GetRenameables();
@@ -83,6 +93,13 @@ namespace zfiRenameTool.ViewModel
             }
 
             _service.Rename(renameables);
+        }
+
+        private void SaveAnShowLogs(object sender, IEnumerable<LogMessage> e)
+        {
+            LogWindow.ShowLogs(e);
+            _service.SaveAllDocs(_body.Docs);
+            _service.Renamed -= SaveAnShowLogs;
         }
     }
 }

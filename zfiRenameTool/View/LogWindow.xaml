@@ -1,0 +1,39 @@
+<Window x:Class="zfiRenameTool.View.LogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:zfiRenameTool.View"
+        xmlns:vm="clr-namespace:zfiRenameTool.ViewModel"
+        xmlns:converters="clr-namespace:zfiRenameTool.ViewModel.Converters"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=vm:LogWindowVm, IsDesignTimeCreatable=False}"
+        Title="LogWindow" Height="450" Width="450">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="0">
+            <ItemsControl ItemsSource="{Binding Messages}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="vm:LogMessage">
+                        <DataTemplate.Resources>
+                            <converters:BoolToColorConverter x:Key="BoolToColoConverter" />
+                        </DataTemplate.Resources>
+                        <TextBlock Margin="2.5"
+                                   Foreground="{Binding IsError, Converter={StaticResource BoolToColoConverter}}">
+                            <Run Text="{Binding Title}" FontWeight="Bold" />
+                            <LineBreak />
+                            <Run Text="{Binding Message}" />
+                        </TextBlock>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+        <Button Grid.Row="1" Margin="2.5" Width="150"
+                HorizontalAlignment="Right" VerticalAlignment="Center"
+                Content="OK" IsCancel="True"
+                IsDefault="True" />
+    </Grid>
+</Window>

@@ -6,6 +6,8 @@ namespace zfiRenameTool.Services
     using Abstractions;
     using Autodesk.Revit.DB;
     using Revit;
+    using View;
+    using ViewModel;
     using Application = Autodesk.Revit.ApplicationServices.Application;
 
     public class RevitService
@@ -22,12 +24,13 @@ namespace zfiRenameTool.Services
             SetupProvides();
         }
 
-        public event EventHandler Renamed;
+        public event EventHandler<IEnumerable<LogMessage>> Renamed;
 
         public List<IRenameableProvider> Providers => _providers;
 
         public IReadOnlyCollection<Document> LoadDocs(IList<string> fileNames)
         {
+            var logs = new List<LogMessage>();
             var documents = new List<Document>();
             foreach (var fileName in fileNames)
             {
@@ -36,11 +39,15 @@ namespace zfiRenameTool.Services
                     var doc = _app.OpenDocumentFile(fileName);
                     documents.Add(doc);
                 }
-                catch (Exception e)
+                catch
                 {
-                    MessageBox.Show("Не удалось загрузить документы", "Внимание!", MessageBoxButton.OK,
-                        MessageBoxImage.Error);
+                    logs.Add(new LogMessage("Не удалось загрузить документ", fileName, true));
                 }
+            }
+
+            if (logs.Count > 0)
+            {
+                LogWindow.ShowLogs(logs);
             }
 
             return documents;
@@ -50,18 +57,31 @@ namespace zfiRenameTool.Services
         {
             _event.Run(app =>
             {
+                var logs = new List<LogMessage>();
                 foreach (var renameable in renameables)
                 {
-                    renameable.Rename();
+                    try
+                    {
+                        renameable.Rename();
+                        logs.Add(new LogMessage(
+                            renameable.Title,
+                            $"Переименнован из {renameable.Source} в {renameable.Destination}"));
+                    }
+                    catch
+                    {
+                        logs.Add(new LogMessage(
+                            renameable.ToString(),
+                            $"Не удалось переимменовать"));
+                    }
                 }
 
-                OnRenamed();
+                OnRenamed(logs);
             });
         }
 
-        protected virtual void OnRenamed()
+        protected virtual void OnRenamed(IEnumerable<LogMessage> logs)
         {
-            Renamed?.Invoke(this, EventArgs.Empty);
+            Renamed?.Invoke(this, logs);
         }
 
         private void SetupProvides()
@@ -72,12 +92,22 @@ namespace zfiRenameTool.Services
 
         public void SaveAllDocs(IReadOnlyCollection<Document> docs)
         {
+            var logs = new List<LogMessage>();
             foreach (Document doc in docs)
             {
-                if (doc.IsFamilyDocument)
+                try
                 {
                     doc.Save();
                 }
+                catch
+                {
+                    logs.Add(new LogMessage("Не удалось сохранить документ", doc.PathName, true));
+                }
+            }
+
+            if (logs.Count > 0)
+            {
+                LogWindow.ShowLogs(logs);
             }
         }
 

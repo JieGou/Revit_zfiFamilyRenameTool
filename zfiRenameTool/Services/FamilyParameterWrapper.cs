@@ -12,11 +12,13 @@ namespace zfiRenameTool.Services
         {
             _parameter = parameter;
             _doc = doc;
+            Title = $"Параметр '{_parameter.Definition.Name}'";
+            Source = _parameter.Definition.Name;
         }
 
-        public string Title => "Параметр";
+        public string Title { get; }
 
-        public string Source => _parameter.Definition.Name;
+        public string Source { get; }
 
         public string Destination { get; set; } = string.Empty;
 
