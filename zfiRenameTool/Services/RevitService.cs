@@ -2,13 +2,17 @@ namespace zfiRenameTool.Services
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Windows;
+    using System.Windows.Forms;
     using Abstractions;
     using Autodesk.Revit.DB;
+    using Autodesk.Revit.UI;
     using Revit;
     using View;
     using ViewModel;
     using Application = Autodesk.Revit.ApplicationServices.Application;
+    using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 
     public class RevitService
     {
@@ -28,10 +32,11 @@ namespace zfiRenameTool.Services
 
         public List<IRenameableProvider> Providers => _providers;
 
-        public IReadOnlyCollection<Document> LoadDocs(IList<string> fileNames)
+        public IReadOnlyCollection<Document> LoadDocs()
         {
             var logs = new List<LogMessage>();
             var documents = new List<Document>();
+            var fileNames = GetFilesNames();
             foreach (var fileName in fileNames)
             {
                 try
@@ -117,6 +122,55 @@ namespace zfiRenameTool.Services
             {
                 doc.Close(false);
             }
+        }
+
+        private IReadOnlyCollection<string> GetFilesNames()
+        {
+            var result = new List<string>();
+
+            var fbd = new FolderBrowserDialog();
+
+            var taskDialog = new TaskDialog("Выбор файлов");
+            taskDialog.AddCommandLink(TaskDialogCommandLinkId.CommandLink1, "Выбрать файлы");
+            taskDialog.AddCommandLink(TaskDialogCommandLinkId.CommandLink2, "Выбрать папку");
+            taskDialog.AddCommandLink(TaskDialogCommandLinkId.CommandLink3, "Выбрать папку включая вложенные");
+            var taskDialogResult = taskDialog.Show();
+
+            switch (taskDialogResult)
+            {
+                case TaskDialogResult.CommandLink1:
+                    var ofd = new OpenFileDialog
+                    {
+                        Multiselect = true,
+                        Filter = "Revit families (*.rfa) | *.rfa"
+                    };
+
+                    if (ofd.ShowDialog() == true)
+                    {
+                        result.AddRange(ofd.FileNames);
+                    }
+
+                    break;
+                case TaskDialogResult.CommandLink2:
+                    if (fbd.ShowDialog() == DialogResult.OK)
+                    {
+                        result.AddRange(Directory.EnumerateFiles(fbd.SelectedPath, "*.rfa",
+                            SearchOption.TopDirectoryOnly));
+                    }
+
+                    break;
+                case TaskDialogResult.CommandLink3:
+                    fbd = new FolderBrowserDialog();
+                    if (fbd.ShowDialog() == DialogResult.OK)
+                    {
+                        result.AddRange(Directory.EnumerateFiles(fbd.SelectedPath, "*.rfa",
+                            SearchOption.AllDirectories));
+                    }
+
+                    break;
+            }
+
+            return result;
         }
     }
 }

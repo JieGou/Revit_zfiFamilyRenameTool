@@ -43,21 +43,15 @@ namespace zfiRenameTool.ViewModel
 
         private void OpenFamilies()
         {
-            var ofd = new OpenFileDialog
-            {
-                Multiselect = true,
-                Filter = "Revit families (*.rfa) | *.rfa"
-            };
-            if (ofd.ShowDialog() == true && ofd.FileNames.Length > 0)
-            {
-                var docs = _service.LoadDocs(ofd.FileNames);
-                Body = new BodyVm(_service, docs, Options);
-            }
-            else
+            var docs = _service.LoadDocs();
+            if (docs.Count == 0)
             {
                 MessageBox.Show("Не выбранно ни одного файла семейства!", "Внимание!", MessageBoxButton.OK,
                     MessageBoxImage.Information);
+                return;
             }
+
+            Body = new BodyVm(_service, docs, Options);
         }
 
         private void CloseAndApply(ICloseable closeable)
