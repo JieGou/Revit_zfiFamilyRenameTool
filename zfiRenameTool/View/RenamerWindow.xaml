@@ -5,6 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:zfiRenameTool.View"
         xmlns:vm="clr-namespace:zfiRenameTool.ViewModel"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=vm:MainVm, IsDesignTimeCreatable=False}"
         Title="RenamerWindow" Height="450" Width="600">
@@ -15,6 +16,13 @@
             </Style>
         </ResourceDictionary>
     </Window.Resources>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closed">
+            <i:InvokeCommandAction
+                Command="{Binding CloseCmd}"
+                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid Margin="5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -42,21 +50,10 @@
             Выбрать семейства
         </Button>
 
-        <Grid Grid.Column="1" Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Button Grid.Column="0"
-                    Command="{Binding CloseCmd}"
-                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
-                Закрыть
-            </Button>
-            <Button Grid.Column="1"
-                    Command="{Binding CloseAndApplyCmd}"
-                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
-                ОК
-            </Button>
-        </Grid>
+        <Button Grid.Row="2" Grid.Column="1"
+                Command="{Binding CloseAndApplyCmd}"
+                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+            ОК
+        </Button>
     </Grid>
 </Window>
