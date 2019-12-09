@@ -49,7 +49,7 @@ namespace zfiRenameTool.ViewModel
             if (ofd.ShowDialog() == true && ofd.FileNames.Length > 0)
             {
                 var docs = _service.LoadDocs(ofd.FileNames);
-                Body = new BodyVm(_service.Providers, docs, _service, Options);
+                Body = new BodyVm(_service, docs, Options);
             }
             else
             {

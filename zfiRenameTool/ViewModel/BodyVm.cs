@@ -18,14 +18,13 @@ namespace zfiRenameTool.ViewModel
         }
 
         public BodyVm(
-            IReadOnlyCollection<IRenameableProvider> serviceProviders,
-            IReadOnlyCollection<Document> docs,
             RevitService service,
+            IReadOnlyCollection<Document> docs,
             OptionsVm optionsVm)
         {
             _docs = docs;
             _service = service;
-            Tabs = serviceProviders.Select(x => new TabVm(x, docs, optionsVm)).ToList();
+            Tabs = _service.Providers.Select(x => new TabVm(x, docs, optionsVm)).ToList();
         }
 
         public IReadOnlyCollection<TabVm> Tabs { get; }
