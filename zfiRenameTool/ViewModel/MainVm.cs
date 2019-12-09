@@ -76,6 +76,12 @@ namespace zfiRenameTool.ViewModel
         private void Apply()
         {
             var renameables = Body.GetRenameables();
+            if (renameables.Count == 0)
+            {
+                MessageBox.Show("Ничего не выбранно!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
             _service.Rename(renameables);
         }
     }
