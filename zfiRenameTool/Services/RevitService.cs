@@ -70,9 +70,9 @@ namespace zfiRenameTool.Services
             Providers.Add(new FamilyParametersProvider());
         }
 
-        public void SaveAllDocs()
+        public void SaveAllDocs(IReadOnlyCollection<Document> docs)
         {
-            foreach (Document doc in _app.Documents)
+            foreach (Document doc in docs)
             {
                 if (doc.IsFamilyDocument)
                 {

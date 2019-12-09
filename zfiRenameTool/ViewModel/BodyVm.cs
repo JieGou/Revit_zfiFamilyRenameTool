@@ -10,7 +10,6 @@ namespace zfiRenameTool.ViewModel
 
     public class BodyVm : ViewModelBase, IDisposable
     {
-        private readonly IReadOnlyCollection<Document> _docs;
         private readonly RevitService _service;
 
         public BodyVm()
@@ -22,16 +21,18 @@ namespace zfiRenameTool.ViewModel
             IReadOnlyCollection<Document> docs,
             OptionsVm optionsVm)
         {
-            _docs = docs;
+            Docs = docs;
             _service = service;
             Tabs = _service.Providers.Select(x => new TabVm(x, docs, optionsVm)).ToList();
         }
+
+        public IReadOnlyCollection<Document> Docs { get; }
 
         public IReadOnlyCollection<TabVm> Tabs { get; }
 
         public void Dispose()
         {
-            _service.CloseDocs(_docs);
+            _service.CloseDocs(Docs);
         }
 
         public IReadOnlyCollection<IRenameable> GetRenameables()

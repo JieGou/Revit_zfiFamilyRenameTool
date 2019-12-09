@@ -59,12 +59,12 @@ namespace zfiRenameTool.ViewModel
 
         private void CloseAndApply(ICloseable closeable)
         {
-            Apply();
             _service.Renamed += (s, e) =>
             {
-                _service.SaveAllDocs();
+                _service.SaveAllDocs(_body.Docs);
                 Close(closeable);
             };
+            Apply();
         }
 
         private void Close(ICloseable closeable)
