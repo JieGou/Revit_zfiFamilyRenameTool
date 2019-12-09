@@ -32,5 +32,10 @@ namespace zfiRenameTool.Services
                 t.Commit();
             }
         }
+
+        public bool CanRename()
+        {
+            return true;
+        }
     }
 }

@@ -134,7 +134,7 @@ namespace zfiRenameTool.ViewModel
                     func = i => oldFunc(i) + Suffix;
                 }
 
-                return i => i.Destination = func(i);
+                return i => i.Destination = i.CanRename() ? func(i) : i.Source;
             }
         }
 

@@ -53,6 +53,11 @@ namespace zfiRenameTool.ViewModel
             _renameable.ForEach(x => x.Rename());
         }
 
+        public bool CanRename()
+        {
+            return true;
+        }
+
         protected virtual void OnChecked(bool e)
         {
             Checked?.Invoke(this, e);

@@ -9,5 +9,7 @@ namespace zfiRenameTool.Abstractions
         string Destination { get; set; }
 
         void Rename();
+
+        bool CanRename();
     }
 }

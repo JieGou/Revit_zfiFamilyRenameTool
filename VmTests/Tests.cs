@@ -182,6 +182,7 @@ namespace VmTests
             mock.Setup(x => x.Source).Returns(source);
             mock.Setup(x => x.Destination).Returns(() => Dest);
             mock.SetupSet(x => x.Destination).Callback(value => Dest = value);
+            mock.Setup(x => x.CanRename()).Returns(true);
             return mock.Object;
         }
     }
