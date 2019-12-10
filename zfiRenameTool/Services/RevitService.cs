@@ -1,9 +1,8 @@
-namespace zfiRenameTool.Services
+namespace zfiFamilyRenameTool.Services
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using System.Windows;
     using System.Windows.Forms;
     using Abstractions;
     using Autodesk.Revit.DB;

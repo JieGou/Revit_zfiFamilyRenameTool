@@ -1,4 +1,4 @@
-namespace zfiRenameTool.Abstractions
+namespace zfiFamilyRenameTool.Abstractions
 {
     using System.Collections.Generic;
     using Autodesk.Revit.DB;

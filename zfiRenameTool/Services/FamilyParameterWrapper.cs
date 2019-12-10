@@ -1,4 +1,4 @@
-namespace zfiRenameTool.Services
+namespace zfiFamilyRenameTool.Services
 {
     using Abstractions;
     using Autodesk.Revit.DB;

@@ -1,4 +1,4 @@
-namespace zfiRenameTool.Exceptions
+namespace zfiFamilyRenameTool.Exceptions
 {
     using System;
     using System.Collections.Generic;

@@ -1,4 +1,4 @@
-namespace zfiRenameTool.Abstractions
+namespace zfiFamilyRenameTool.Abstractions
 {
     public interface ICloseable
     {

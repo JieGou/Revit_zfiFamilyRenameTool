@@ -77,9 +77,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\zfiRenameTool\zfiRenameTool.csproj">
+    <ProjectReference Include="..\zfiRenameTool\zfiFamilyRenameTool.csproj">
       <Project>{cb1129f4-1ef1-4eb8-926e-59c71660ba7f}</Project>
-      <Name>zfiRenameTool</Name>
+      <Name>zfiFamilyRenameTool</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

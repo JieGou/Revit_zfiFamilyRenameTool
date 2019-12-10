@@ -5,8 +5,8 @@ namespace VmTests
 {
     using FluentAssertions;
     using Moq;
-    using zfiRenameTool.Abstractions;
-    using zfiRenameTool.ViewModel;
+    using zfiFamilyRenameTool.Abstractions;
+    using zfiFamilyRenameTool.ViewModel;
 
     public class Tests
     {

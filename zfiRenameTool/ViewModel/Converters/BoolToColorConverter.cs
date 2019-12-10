@@ -1,4 +1,4 @@
-namespace zfiRenameTool.ViewModel.Converters
+namespace zfiFamilyRenameTool.ViewModel.Converters
 {
     using System;
     using System.Globalization;

@@ -1,13 +1,13 @@
-namespace zfiRenameTool.Revit
+namespace zfiFamilyRenameTool.Revit
 {
     using System;
     using Autodesk.Revit.Attributes;
     using Autodesk.Revit.DB;
     using Autodesk.Revit.UI;
+    using Exceptions;
     using Services;
     using View;
     using ViewModel;
-    using zfiRenameTool.Exceptions;
 
     [Transaction(TransactionMode.Manual)]
     [Regeneration(RegenerationOption.Manual)]

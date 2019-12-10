@@ -1,4 +1,4 @@
-namespace zfiRenameTool.View
+namespace zfiFamilyRenameTool.View
 {
     using System.Collections.Generic;
     using System.Windows;

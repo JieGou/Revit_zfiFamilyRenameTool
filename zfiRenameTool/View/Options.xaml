@@ -1,12 +1,11 @@
-<UserControl x:Class="zfiRenameTool.View.Options"
+<UserControl x:Class="zfiFamilyRenameTool.View.Options"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:zfiRenameTool.View"
-             xmlns:vm="clr-namespace:zfiRenameTool.ViewModel"
+             xmlns:viewModel="clr-namespace:zfiFamilyRenameTool.ViewModel"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance Type=vm:OptionsVm, IsDesignTimeCreatable=False}"
+             d:DataContext="{d:DesignInstance Type=viewModel:OptionsVm, IsDesignTimeCreatable=False}"
              MinWidth="150" Margin="5">
 
     <UserControl.Resources>

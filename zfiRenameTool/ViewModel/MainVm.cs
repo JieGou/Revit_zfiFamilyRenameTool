@@ -1,12 +1,10 @@
-namespace zfiRenameTool.ViewModel
+namespace zfiFamilyRenameTool.ViewModel
 {
-    using System;
     using System.Collections.Generic;
     using System.Windows;
     using System.Windows.Input;
     using Abstractions;
     using MicroMvvm;
-    using Microsoft.Win32;
     using Services;
     using View;
 

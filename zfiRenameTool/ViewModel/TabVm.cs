@@ -1,8 +1,7 @@
-namespace zfiRenameTool.ViewModel
+namespace zfiFamilyRenameTool.ViewModel
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.ComponentModel;
     using System.Linq;
     using Abstractions;
     using Autodesk.Revit.DB;

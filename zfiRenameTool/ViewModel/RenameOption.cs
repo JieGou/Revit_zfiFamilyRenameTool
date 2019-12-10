@@ -1,4 +1,4 @@
-namespace zfiRenameTool.ViewModel
+namespace zfiFamilyRenameTool.ViewModel
 {
     public enum RenameOption
     {

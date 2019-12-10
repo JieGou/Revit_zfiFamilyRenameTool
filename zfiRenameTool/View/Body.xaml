@@ -1,25 +1,24 @@
-<UserControl x:Class="zfiRenameTool.View.Body"
+<UserControl x:Class="zfiFamilyRenameTool.View.Body"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:zfiRenameTool.View"
-             xmlns:vm="clr-namespace:zfiRenameTool.ViewModel"
+             xmlns:viewModel="clr-namespace:zfiFamilyRenameTool.ViewModel"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance Type=vm:BodyVm, IsDesignTimeCreatable=False}"
+             d:DataContext="{d:DesignInstance Type=viewModel:BodyVm, IsDesignTimeCreatable=False}"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <ResourceDictionary>
-            <DataTemplate x:Key="TabHeaderTemplate" DataType="vm:TabVm">
+            <DataTemplate x:Key="TabHeaderTemplate" DataType="viewModel:TabVm">
                 <Label Content="{Binding Title}" />
             </DataTemplate>
-            <DataTemplate x:Key="TabContentTemplate" DataType="vm:TabVm">
+            <DataTemplate x:Key="TabContentTemplate" DataType="viewModel:TabVm">
                 <ListView ItemsSource="{Binding Renameables}">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn>
                                 <GridViewColumn.CellTemplate>
-                                    <DataTemplate DataType="vm:RenameableVm">
+                                    <DataTemplate DataType="viewModel:RenameableVm">
                                         <CheckBox IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>

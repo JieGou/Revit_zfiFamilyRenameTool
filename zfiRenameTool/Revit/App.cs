@@ -1,4 +1,4 @@
-namespace zfiRenameTool.Revit
+namespace zfiFamilyRenameTool.Revit
 {
     using Autodesk.Revit.UI;
 

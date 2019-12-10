@@ -1,4 +1,4 @@
-namespace zfiRenameTool.View
+namespace zfiFamilyRenameTool.View
 {
     using System.Windows.Controls;
 
