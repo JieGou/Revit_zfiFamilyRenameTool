@@ -12,6 +12,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VmTests", "VmTests\VmTests.csproj", "{2D62AD98-0A78-4AAD-92E1-8D38AD785CD6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zfiFamilyRenameTool_2015", "zfiFamilyRenameTool_2015\zfiFamilyRenameTool_2015.csproj", "{BD872A5A-DD08-4D76-A51E-4C5453DD141C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zfiFamilyRenameTool_2016", "zfiFamilyRenameTool_2016\zfiFamilyRenameTool_2016.csproj", "{6F1E21A9-ED73-49FE-98BA-FBE6F6A50C82}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zfiFamilyRenameTool_2017", "zfiFamilyRenameTool_2017\zfiFamilyRenameTool_2017.csproj", "{ED20D1A1-93BA-4B5D-A032-EBBFA184971F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zfiFamilyRenameTool_2018", "zfiFamilyRenameTool_2018\zfiFamilyRenameTool_2018.csproj", "{5B2CE2CD-5BB9-40C8-99FE-66D50E8C8611}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zfiFamilyRenameTool_2019", "zfiFamilyRenameTool_2019\zfiFamilyRenameTool_2019.csproj", "{5F05409A-3F01-4DDB-938B-09A6275F1AD4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zfiFamilyRenameTool_2020", "zfiFamilyRenameTool_2020\zfiFamilyRenameTool_2020.csproj", "{72371CE5-550C-4094-BDF3-521B1FF062BC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +38,30 @@ Global
 		{2D62AD98-0A78-4AAD-92E1-8D38AD785CD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D62AD98-0A78-4AAD-92E1-8D38AD785CD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D62AD98-0A78-4AAD-92E1-8D38AD785CD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD872A5A-DD08-4D76-A51E-4C5453DD141C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD872A5A-DD08-4D76-A51E-4C5453DD141C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD872A5A-DD08-4D76-A51E-4C5453DD141C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD872A5A-DD08-4D76-A51E-4C5453DD141C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F1E21A9-ED73-49FE-98BA-FBE6F6A50C82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F1E21A9-ED73-49FE-98BA-FBE6F6A50C82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F1E21A9-ED73-49FE-98BA-FBE6F6A50C82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F1E21A9-ED73-49FE-98BA-FBE6F6A50C82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED20D1A1-93BA-4B5D-A032-EBBFA184971F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED20D1A1-93BA-4B5D-A032-EBBFA184971F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED20D1A1-93BA-4B5D-A032-EBBFA184971F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED20D1A1-93BA-4B5D-A032-EBBFA184971F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B2CE2CD-5BB9-40C8-99FE-66D50E8C8611}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B2CE2CD-5BB9-40C8-99FE-66D50E8C8611}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B2CE2CD-5BB9-40C8-99FE-66D50E8C8611}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B2CE2CD-5BB9-40C8-99FE-66D50E8C8611}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F05409A-3F01-4DDB-938B-09A6275F1AD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F05409A-3F01-4DDB-938B-09A6275F1AD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F05409A-3F01-4DDB-938B-09A6275F1AD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F05409A-3F01-4DDB-938B-09A6275F1AD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72371CE5-550C-4094-BDF3-521B1FF062BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72371CE5-550C-4094-BDF3-521B1FF062BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72371CE5-550C-4094-BDF3-521B1FF062BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72371CE5-550C-4094-BDF3-521B1FF062BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
