@@ -4,9 +4,9 @@ namespace zfiFamilyRenameTool.ViewModel
     using System.Collections.Generic;
     using System.Linq;
     using Abstractions;
-    using MicroMvvm;
+    using ModPlusAPI.Mvvm;
 
-    public class RenameableVm : ViewModelBase, IRenameable
+    public class RenameableVm : VmBase, IRenameable
     {
         private readonly List<IRenameable> _renameable;
         private bool _isChecked;
@@ -28,7 +28,7 @@ namespace zfiFamilyRenameTool.ViewModel
             set
             {
                 _renameable.ForEach(x => x.Destination = value);
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -44,7 +44,7 @@ namespace zfiFamilyRenameTool.ViewModel
                 }
 
                 OnChecked(value);
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
 

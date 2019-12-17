@@ -5,9 +5,9 @@ namespace zfiFamilyRenameTool.ViewModel
     using System.Linq;
     using Abstractions;
     using Autodesk.Revit.DB;
-    using MicroMvvm;
+    using ModPlusAPI.Mvvm;
 
-    public class TabVm : ViewModelBase
+    public class TabVm : VmBase
     {
         private readonly IRenameableProvider _provider;
         private readonly OptionsVm _optionsVm;
@@ -49,7 +49,7 @@ namespace zfiFamilyRenameTool.ViewModel
                     renameableVm.IsChecked = value;
                 }
 
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
 

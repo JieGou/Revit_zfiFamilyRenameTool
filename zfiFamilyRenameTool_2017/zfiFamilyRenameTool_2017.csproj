@@ -34,30 +34,11 @@
     <CodeAnalysisRuleSet>$(SolutionDir)\ModPlus.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ModPlusAPI">
-      <HintPath>..\..\..\..\..\..\..\ModPlus\Extensions\ModPlusAPI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="ModPlusStyle">
-      <HintPath>..\..\..\..\..\..\..\ModPlus\Extensions\ModPlusStyle.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="RevitAPI">
-      <HintPath>C:\_Revit dlls\2017\RevitAPI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="RevitAPIUI">
-      <HintPath>C:\_Revit dlls\2017\RevitAPIUI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Windows.Interactivity">
-      <HintPath>..\..\..\..\..\..\..\ModPlus\Extensions\System.Windows.Interactivity.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -68,20 +49,119 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
+    <Compile Include="..\zfiFamilyRenameTool_2015\Abstractions\ICloseable.cs">
+      <Link>Abstractions\ICloseable.cs</Link>
+    </Compile>
+    <Compile Include="..\zfiFamilyRenameTool_2015\Abstractions\IRenameable.cs">
+      <Link>Abstractions\IRenameable.cs</Link>
+    </Compile>
+    <Compile Include="..\zfiFamilyRenameTool_2015\Abstractions\IRenameableProvider.cs">
+      <Link>Abstractions\IRenameableProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\zfiFamilyRenameTool_2015\Exceptions\PluginException.cs">
+      <Link>Exceptions\PluginException.cs</Link>
+    </Compile>
     <Compile Include="..\zfiFamilyRenameTool_2015\ModPlusConnector.cs">
       <Link>ModPlusConnector.cs</Link>
     </Compile>
     <Compile Include="..\zfiFamilyRenameTool_2015\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="..\zfiFamilyRenameTool_2015\Revit\RenamerCmd.cs">
+      <Link>Revit\RenamerCmd.cs</Link>
+    </Compile>
+    <Compile Include="..\zfiFamilyRenameTool_2015\Revit\RevitEvent.cs">
+      <Link>Revit\RevitEvent.cs</Link>
+    </Compile>
+    <Compile Include="..\zfiFamilyRenameTool_2015\Services\FamilyParametersProvider.cs">
+      <Link>Services\FamilyParametersProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\zfiFamilyRenameTool_2015\Services\FamilyParameterWrapper.cs">
+      <Link>Services\FamilyParameterWrapper.cs</Link>
+    </Compile>
+    <Compile Include="..\zfiFamilyRenameTool_2015\Services\RevitService.cs">
+      <Link>Services\RevitService.cs</Link>
+    </Compile>
+    <Compile Include="..\zfiFamilyRenameTool_2015\ViewModel\BodyVm.cs">
+      <Link>ViewModel\BodyVm.cs</Link>
+    </Compile>
+    <Compile Include="..\zfiFamilyRenameTool_2015\ViewModel\Converters\BoolToColorConverter.cs">
+      <Link>ViewModel\Converters\BoolToColorConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\zfiFamilyRenameTool_2015\ViewModel\LogMessage.cs">
+      <Link>ViewModel\LogMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\zfiFamilyRenameTool_2015\ViewModel\LogWindowVm.cs">
+      <Link>ViewModel\LogWindowVm.cs</Link>
+    </Compile>
+    <Compile Include="..\zfiFamilyRenameTool_2015\ViewModel\MainVm.cs">
+      <Link>ViewModel\MainVm.cs</Link>
+    </Compile>
+    <Compile Include="..\zfiFamilyRenameTool_2015\ViewModel\OptionsVm.cs">
+      <Link>ViewModel\OptionsVm.cs</Link>
+    </Compile>
+    <Compile Include="..\zfiFamilyRenameTool_2015\ViewModel\RenameableVm.cs">
+      <Link>ViewModel\RenameableVm.cs</Link>
+    </Compile>
+    <Compile Include="..\zfiFamilyRenameTool_2015\ViewModel\RenameOption.cs">
+      <Link>ViewModel\RenameOption.cs</Link>
+    </Compile>
+    <Compile Include="..\zfiFamilyRenameTool_2015\ViewModel\TabVm.cs">
+      <Link>ViewModel\TabVm.cs</Link>
+    </Compile>
+    <Compile Include="..\zfiFamilyRenameTool_2015\View\Body.xaml.cs">
+      <Link>View\Body.xaml.cs</Link>
+      <DependentUpon>Body.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\zfiFamilyRenameTool_2015\View\LogWindow.xaml.cs">
+      <Link>View\LogWindow.xaml.cs</Link>
+      <DependentUpon>LogWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\zfiFamilyRenameTool_2015\View\Options.xaml.cs">
+      <Link>View\Options.xaml.cs</Link>
+      <DependentUpon>Options.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\zfiFamilyRenameTool_2015\View\RenamerWindow.xaml.cs">
+      <Link>View\RenamerWindow.xaml.cs</Link>
+      <DependentUpon>RenamerWindow.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="ModPlus.Revit.API.2017">
+      <Version>1.0.0</Version>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="ModPlusAPI">
+      <Version>1.3.1</Version>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="ModPlusStyle">
+      <Version>1.3.0</Version>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="StyleCop.Analyzers">
+      <Version>1.1.118</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="..\zfiFamilyRenameTool_2015\View\Body.xaml">
+      <Link>View\Body.xaml</Link>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\zfiFamilyRenameTool_2015\View\LogWindow.xaml">
+      <Link>View\LogWindow.xaml</Link>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\zfiFamilyRenameTool_2015\View\Options.xaml">
+      <Link>View\Options.xaml</Link>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\zfiFamilyRenameTool_2015\View\RenamerWindow.xaml">
+      <Link>View\RenamerWindow.xaml</Link>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

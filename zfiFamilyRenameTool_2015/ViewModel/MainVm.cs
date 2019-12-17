@@ -4,11 +4,11 @@ namespace zfiFamilyRenameTool.ViewModel
     using System.Windows;
     using System.Windows.Input;
     using Abstractions;
-    using MicroMvvm;
+    using ModPlusAPI.Mvvm;
     using Services;
     using View;
 
-    public class MainVm : ViewModelBase
+    public class MainVm : VmBase
     {
         private readonly RevitService _service;
         private BodyVm _body;
@@ -19,13 +19,13 @@ namespace zfiFamilyRenameTool.ViewModel
             Options = new OptionsVm();
         }
 
-        public ICommand ApplyCmd => new RelayCommand(ApplyAndShowLogs);
+        public ICommand ApplyCmd => new RelayCommandWithoutParameter(ApplyAndShowLogs);
 
         public ICommand CloseCmd => new RelayCommand<ICloseable>(Close);
 
         public ICommand CloseAndApplyCmd => new RelayCommand<ICloseable>(CloseAndApply);
 
-        public ICommand OpenFamiliesCmd => new RelayCommand(OpenFamilies);
+        public ICommand OpenFamiliesCmd => new RelayCommandWithoutParameter(OpenFamilies);
 
         public BodyVm Body
         {
@@ -33,7 +33,7 @@ namespace zfiFamilyRenameTool.ViewModel
             set
             {
                 _body = value;
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -74,7 +74,7 @@ namespace zfiFamilyRenameTool.ViewModel
             _service.Renamed += SaveAnShowLogs;
             Apply();
         }
-
+        
         private void Apply()
         {
             var renameables = Body.GetRenameables();

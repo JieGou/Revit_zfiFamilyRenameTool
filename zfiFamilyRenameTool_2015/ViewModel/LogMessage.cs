@@ -1,8 +1,8 @@
 namespace zfiFamilyRenameTool.ViewModel
 {
-    using MicroMvvm;
+    using ModPlusAPI.Mvvm;
 
-    public class LogMessage : ModelBase
+    public class LogMessage : VmBase
     {
         public LogMessage(string title, string message, bool isError = false)
         {

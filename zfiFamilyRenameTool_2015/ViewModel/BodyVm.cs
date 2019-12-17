@@ -5,10 +5,10 @@ namespace zfiFamilyRenameTool.ViewModel
     using System.Linq;
     using Abstractions;
     using Autodesk.Revit.DB;
-    using MicroMvvm;
+    using ModPlusAPI.Mvvm;
     using Services;
 
-    public class BodyVm : ViewModelBase, IDisposable
+    public class BodyVm : VmBase, IDisposable
     {
         private readonly RevitService _service;
 

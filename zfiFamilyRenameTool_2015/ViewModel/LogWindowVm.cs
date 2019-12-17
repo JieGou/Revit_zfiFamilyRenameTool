@@ -1,9 +1,9 @@
 namespace zfiFamilyRenameTool.ViewModel
 {
     using System.Collections.Generic;
-    using MicroMvvm;
+    using ModPlusAPI.Mvvm;
 
-    public class LogWindowVm : ViewModelBase
+    public class LogWindowVm : VmBase
     {
         public LogWindowVm(IEnumerable<LogMessage> messages)
         {

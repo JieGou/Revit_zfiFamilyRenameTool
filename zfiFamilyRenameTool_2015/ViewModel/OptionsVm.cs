@@ -4,9 +4,9 @@ namespace zfiFamilyRenameTool.ViewModel
     using System.Text.RegularExpressions;
     using System.Windows.Input;
     using Abstractions;
-    using MicroMvvm;
+    using ModPlusAPI.Mvvm;
 
-    public partial class OptionsVm : ViewModelBase
+    public partial class OptionsVm : VmBase
     {
         private RenameOption _currentRenameOption = RenameOption.StartWith;
         private bool _isCaseSensitive;
@@ -23,7 +23,7 @@ namespace zfiFamilyRenameTool.ViewModel
             set
             {
                 _isCaseSensitive = value;
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -33,7 +33,7 @@ namespace zfiFamilyRenameTool.ViewModel
             set
             {
                 _find = value;
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -43,7 +43,7 @@ namespace zfiFamilyRenameTool.ViewModel
             set
             {
                 _replaceValue = value;
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -53,7 +53,7 @@ namespace zfiFamilyRenameTool.ViewModel
             set
             {
                 _prefix = value;
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -63,7 +63,7 @@ namespace zfiFamilyRenameTool.ViewModel
             set
             {
                 _suffix = value;
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -141,7 +141,7 @@ namespace zfiFamilyRenameTool.ViewModel
         private void OptionChecked(string s)
         {
             _currentRenameOption = (RenameOption)Enum.Parse(typeof(RenameOption), s);
-            RaisePropertyChanged();
+            OnPropertyChanged();
         }
     }
 }
