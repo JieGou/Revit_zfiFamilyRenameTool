@@ -1,12 +1,16 @@
 namespace zfiFamilyRenameTool.View
 {
-    using System.Windows.Controls;
-
-    public partial class Options : UserControl
+    public partial class Options
     {
         public Options()
         {
             InitializeComponent();
+
+            // change theme
+            ModPlusAPI.Windows.Helpers.WindowHelpers.ChangeStyleForResourceDictionary(Resources);
+
+            // change lang
+            ModPlusAPI.Language.SetLanguageProviderForResourceDictionary(Resources);
         }
     }
 }

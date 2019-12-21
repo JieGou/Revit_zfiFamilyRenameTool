@@ -4,25 +4,30 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModel="clr-namespace:zfiFamilyRenameTool.ViewModel"
+             xmlns:mps="https://modplus.org/winfx/xaml/controls"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance Type=viewModel:BodyVm, IsDesignTimeCreatable=False}"
+             d:DataContext="{d:DesignInstance Type=viewModel:BodyViewModel, IsDesignTimeCreatable=False}"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <ResourceDictionary>
-            <DataTemplate x:Key="TabHeaderTemplate" DataType="viewModel:TabVm">
-                <Label Content="{Binding Title}" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/ModPlusStyle;component/Styles/Controls.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <DataTemplate x:Key="TabHeaderTemplate" DataType="viewModel:TabViewModel">
+                <TextBlock Text="{Binding Path=Title}" />
             </DataTemplate>
-            <DataTemplate x:Key="TabContentTemplate" DataType="viewModel:TabVm">
-                <ListView ItemsSource="{Binding Renameables}">
+            <DataTemplate x:Key="TabContentTemplate" DataType="viewModel:TabViewModel">
+                <ListView ItemsSource="{Binding Renameables}" Margin="-3 3 -3 -3"
+                          mps:ListViewAssist.ListViewItemPadding="2 4">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn>
                                 <GridViewColumn.CellTemplate>
-                                    <DataTemplate DataType="viewModel:RenameableVm">
-                                        <CheckBox IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}" />
+                                    <DataTemplate DataType="viewModel:RenameableViewModel">
+                                        <CheckBox IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}" Margin="0" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
-                                <CheckBox IsChecked="{Binding AllSelected, UpdateSourceTrigger=PropertyChanged}" />
+                                <CheckBox IsChecked="{Binding AllSelected, UpdateSourceTrigger=PropertyChanged}" Margin="0" />
                             </GridViewColumn>
                             <GridViewColumn Header="Исходное значение" DisplayMemberBinding="{Binding Source}" />
                             <GridViewColumn Header="Результат" DisplayMemberBinding="{Binding Destination}" />
@@ -32,10 +37,10 @@
             </DataTemplate>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid Margin="5">
-        <TabControl
-            ItemsSource="{Binding Tabs}"
-            ItemTemplate="{StaticResource TabHeaderTemplate}"
-            ContentTemplate="{StaticResource TabContentTemplate}" />
-    </Grid>
+    <TabControl
+        ItemsSource="{Binding Tabs}" 
+        ItemTemplate="{StaticResource TabHeaderTemplate}"
+        ContentTemplate="{StaticResource TabContentTemplate}"
+        SelectedIndex="0"
+        mps:ControlsAssist.HeaderFontSize="14"/>
 </UserControl>

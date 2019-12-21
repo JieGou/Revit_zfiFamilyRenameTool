@@ -1,27 +1,40 @@
-<Window x:Class="zfiFamilyRenameTool.View.LogWindow"
+<mps:ModPlusWindow x:Class="zfiFamilyRenameTool.View.LogWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:converters="clr-namespace:zfiFamilyRenameTool.ViewModel.Converters"
         xmlns:viewModel="clr-namespace:zfiFamilyRenameTool.ViewModel"
+        xmlns:mps="https://modplus.org/winfx/xaml/controls"
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance Type=viewModel:LogWindowVm, IsDesignTimeCreatable=False}"
+        d:DataContext="{d:DesignInstance Type=viewModel:LogWindowViewModel, IsDesignTimeCreatable=False}"
         Title="LogWindow" Height="450" Width="450">
-    <Grid Margin="5">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/ModPlusStyle;component/Styles/Controls.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ScrollViewer Grid.Row="0">
-            <ItemsControl ItemsSource="{Binding Messages}">
+        <ScrollViewer Grid.Row="0" Margin="{DynamicResource ModPlusDefaultMargin}">
+            <ItemsControl ItemsSource="{Binding Path=Messages}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate DataType="viewModel:LogMessage">
-                        <DataTemplate.Resources>
-                            <converters:BoolToColorConverter x:Key="BoolToColoConverter" />
-                        </DataTemplate.Resources>
-                        <TextBlock Margin="2.5"
-                                   Foreground="{Binding IsError, Converter={StaticResource BoolToColoConverter}}">
+                        <TextBlock Margin="0 4">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=IsError}" Value="True">
+                                            <Setter Property="Foreground" Value="{DynamicResource ErrorBrush}"></Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
                             <Run Text="{Binding Title}" FontWeight="Bold" />
                             <LineBreak />
                             <Run Text="{Binding Message}" />
@@ -30,9 +43,6 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
-        <Button Grid.Row="1" Margin="2.5" Width="150"
-                HorizontalAlignment="Right" VerticalAlignment="Center"
-                Content="OK" IsCancel="True"
-                IsDefault="True" />
+        <Button Grid.Row="1" Content="OK" IsCancel="True" IsDefault="True" />
     </Grid>
-</Window>
+</mps:ModPlusWindow>

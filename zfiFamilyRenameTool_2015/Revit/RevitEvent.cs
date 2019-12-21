@@ -6,7 +6,7 @@ namespace zfiFamilyRenameTool.Revit
     public class RevitEvent : IExternalEventHandler
     {
         private Action<UIApplication> _action;
-        private ExternalEvent _externalEvent;
+        private readonly ExternalEvent _externalEvent;
 
         public RevitEvent()
         {

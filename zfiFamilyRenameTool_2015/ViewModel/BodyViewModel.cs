@@ -39,5 +39,13 @@ namespace zfiFamilyRenameTool.ViewModel
         {
             return Tabs.SelectMany(x => x.Renameables.Where(r => r.IsChecked)).ToList();
         }
+
+        public void ReloadRenameables()
+        {
+            foreach (var tab in Tabs)
+            {
+                tab.Reload();
+            }
+        }
     }
 }

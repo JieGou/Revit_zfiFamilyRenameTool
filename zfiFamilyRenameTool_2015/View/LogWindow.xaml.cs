@@ -1,10 +1,9 @@
 namespace zfiFamilyRenameTool.View
 {
     using System.Collections.Generic;
-    using System.Windows;
     using ViewModel;
 
-    public partial class LogWindow : Window
+    public partial class LogWindow
     {
         public LogWindow()
         {
@@ -14,7 +13,7 @@ namespace zfiFamilyRenameTool.View
         public LogWindow(IEnumerable<LogMessage> logs)
             : this()
         {
-            DataContext = new LogWindowVm(logs);
+            DataContext = new LogWindowViewModel(logs);
         }
 
         public static void ShowLogs(IEnumerable<LogMessage> logs)

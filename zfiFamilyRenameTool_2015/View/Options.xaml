@@ -4,28 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModel="clr-namespace:zfiFamilyRenameTool.ViewModel"
+             xmlns:mps="https://modplus.org/winfx/xaml/controls"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance Type=viewModel:OptionsVm, IsDesignTimeCreatable=False}"
-             MinWidth="150" Margin="5">
+             d:DataContext="{d:DesignInstance Type=viewModel:OptionsViewModel, IsDesignTimeCreatable=False}"
+             MinWidth="250">
 
     <UserControl.Resources>
         <ResourceDictionary>
-            <Style TargetType="TextBox">
-                <Setter Property="Margin" Value="2.5" />
-                <Setter Property="HorizontalAlignment" Value="Stretch" />
-                <Setter Property="VerticalAlignment" Value="Center" />
-            </Style>
-            <Style TargetType="Label">
-                <Setter Property="Margin" Value="2.5" />
-                <Setter Property="VerticalAlignment" Value="Center" />
-                <Setter Property="HorizontalAlignment" Value="Right" />
-            </Style>
-            <Style TargetType="RadioButton">
-                <Setter Property="Margin" Value="2.5" />
-            </Style>
-            <Style TargetType="CheckBox">
-                <Setter Property="Margin" Value="2.5" />
-            </Style>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/ModPlusStyle;component/Styles/Controls.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -33,7 +21,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <GroupBox Grid.Row="0" Header="Преффикс/Суффикс">
+        <GroupBox Grid.Row="0" Header="Префикс/Суффикс">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -46,12 +34,14 @@
                 <Label Grid.Row="0" Grid.Column="0" Content="Префикс:" />
                 <Label Grid.Row="1" Grid.Column="0" Content="Суффикс:" />
 
-                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Prefix, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Suffix, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Prefix, UpdateSourceTrigger=PropertyChanged}"
+                         mps:TextFieldAssist.ClearTextButton="True" />
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Suffix, UpdateSourceTrigger=PropertyChanged}"
+                         mps:TextFieldAssist.ClearTextButton="True" />
             </Grid>
         </GroupBox>
 
-        <GroupBox Grid.Row="1" Header="Опции">
+        <GroupBox Grid.Row="1" Header="Поиск и замена">
             <StackPanel>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -65,8 +55,9 @@
                     <Label Grid.Row="0" Grid.Column="0" Content="Найти:" />
                     <Label Grid.Row="1" Grid.Column="0" Content="Заменить на:" />
 
-                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Find, UpdateSourceTrigger=PropertyChanged}" />
-                    <TextBox Grid.Row="1" Grid.Column="1"
+                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Find, UpdateSourceTrigger=PropertyChanged}"
+                             mps:TextFieldAssist.ClearTextButton="True" />
+                    <TextBox Grid.Row="1" Grid.Column="1" mps:TextFieldAssist.ClearTextButton="True"
                              Text="{Binding ReplaceValue, UpdateSourceTrigger=PropertyChanged}" />
                 </Grid>
 

@@ -20,7 +20,7 @@ namespace VmTests
 
             var renameable = GetRenameable(source);
 
-            var optionsVm = new OptionsVm { Prefix = prefix };
+            var optionsVm = new OptionsViewModel { Prefix = prefix };
             var action = optionsVm.Rename;
             action(renameable);
             renameable.Destination.Should().Be(prefix + source);
@@ -34,7 +34,7 @@ namespace VmTests
 
             var renameable = GetRenameable(source);
 
-            var optionsVm = new OptionsVm { Suffix = suffix };
+            var optionsVm = new OptionsViewModel { Suffix = suffix };
             var action = optionsVm.Rename;
             action(renameable);
             renameable.Destination.Should().Be(source + suffix);
@@ -49,7 +49,7 @@ namespace VmTests
 
             var renameable = GetRenameable(source);
 
-            var optionsVm = new OptionsVm { Prefix = prefix, Suffix = suffix };
+            var optionsVm = new OptionsViewModel { Prefix = prefix, Suffix = suffix };
             var action = optionsVm.Rename;
             action(renameable);
             renameable.Destination.Should().Be(prefix + source + suffix);
@@ -64,7 +64,7 @@ namespace VmTests
 
             var renameable = GetRenameable(source);
 
-            var optionsVm = new OptionsVm { Find = find };
+            var optionsVm = new OptionsViewModel { Find = find };
             optionsVm.OptionCheckedCmd.Execute(nameof(RenameOption.StartWith));
             var action = optionsVm.Rename;
             action(renameable);
@@ -81,7 +81,7 @@ namespace VmTests
 
             var renameable = GetRenameable(source);
 
-            var optionsVm = new OptionsVm { Find = find };
+            var optionsVm = new OptionsViewModel { Find = find };
             optionsVm.OptionCheckedCmd.Execute(nameof(RenameOption.EndWith));
             var action = optionsVm.Rename;
             action(renameable);
@@ -98,7 +98,7 @@ namespace VmTests
 
             var renameable = GetRenameable(source);
 
-            var optionsVm = new OptionsVm { Find = find };
+            var optionsVm = new OptionsViewModel { Find = find };
             optionsVm.OptionCheckedCmd.Execute(nameof(RenameOption.Contains));
             var action = optionsVm.Rename;
             action(renameable);
@@ -115,7 +115,7 @@ namespace VmTests
 
             var renameable = GetRenameable(source);
 
-            var optionsVm = new OptionsVm { Find = find, ReplaceValue = result };
+            var optionsVm = new OptionsViewModel { Find = find, ReplaceValue = result };
             optionsVm.OptionCheckedCmd.Execute(nameof(RenameOption.MatchesWhole));
             var action = optionsVm.Rename;
             action(renameable);
@@ -132,7 +132,7 @@ namespace VmTests
 
             var renameable = GetRenameable(source);
 
-            var optionsVm = new OptionsVm { Find = find };
+            var optionsVm = new OptionsViewModel { Find = find };
             optionsVm.OptionCheckedCmd.Execute(nameof(RenameOption.Regex));
             var action = optionsVm.Rename;
             action(renameable);
@@ -149,7 +149,7 @@ namespace VmTests
 
             var renameable = GetRenameable(source);
 
-            var optionsVm = new OptionsVm { Find = find, IsCaseSensitive = true };
+            var optionsVm = new OptionsViewModel { Find = find, IsCaseSensitive = true };
             optionsVm.OptionCheckedCmd.Execute(nameof(RenameOption.Contains));
             var action = optionsVm.Rename;
             action(renameable);
@@ -168,7 +168,7 @@ namespace VmTests
 
             var renameable = GetRenameable(source);
 
-            var optionsVm = new OptionsVm { Find = find, IsCaseSensitive = true, Prefix = prefix, Suffix = suffix };
+            var optionsVm = new OptionsViewModel { Find = find, IsCaseSensitive = true, Prefix = prefix, Suffix = suffix };
             optionsVm.OptionCheckedCmd.Execute(nameof(RenameOption.Contains));
             var action = optionsVm.Rename;
             action(renameable);

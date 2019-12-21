@@ -6,7 +6,7 @@ namespace zfiFamilyRenameTool.ViewModel
     using Abstractions;
     using ModPlusAPI.Mvvm;
 
-    public partial class OptionsViewModel : VmBase
+    public class OptionsViewModel : VmBase
     {
         private RenameOption _currentRenameOption = RenameOption.StartWith;
         private bool _isCaseSensitive;

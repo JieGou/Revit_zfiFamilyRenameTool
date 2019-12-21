@@ -10,19 +10,21 @@ namespace zfiFamilyRenameTool.ViewModel
     public class TabViewModel : VmBase
     {
         private readonly IRenameableProvider _provider;
+        private readonly IReadOnlyCollection<Document> _docs;
         private readonly OptionsViewModel _optionsViewModel;
         private bool _allSelected;
 
         public TabViewModel(IRenameableProvider provider, IReadOnlyCollection<Document> docs, OptionsViewModel optionsViewModel)
         {
             _provider = provider;
+            _docs = docs;
             _optionsViewModel = optionsViewModel;
 
             Renameables = new ObservableCollection<RenameableViewModel>();
 
-            foreach (var doc in docs)
+            foreach (var doc in _docs)
             {
-                var renameables = provider.GetRenameables(doc);
+                var renameables = _provider.GetRenameables(doc);
                 foreach (var renameableVm in renameables.GroupBy(x => x.Source)
                     .Select(x => new RenameableViewModel(x.ToList())))
                 {
@@ -51,6 +53,24 @@ namespace zfiFamilyRenameTool.ViewModel
 
                 OnPropertyChanged();
             }
+        }
+
+        public void Reload()
+        {
+            Renameables.Clear();
+
+            foreach (var doc in _docs)
+            {
+                var renameables = _provider.GetRenameables(doc);
+                foreach (var renameableVm in renameables.GroupBy(x => x.Source)
+                    .Select(x => new RenameableViewModel(x.ToList())))
+                {
+                    renameableVm.Checked += (sender, b) => OptionsVmOnPropertyChanged();
+                    Renameables.Add(renameableVm);
+                }
+            }
+
+            AllSelected = false;
         }
 
         private void OptionsVmOnPropertyChanged()

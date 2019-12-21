@@ -3,6 +3,7 @@ namespace zfiFamilyRenameTool.Services
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using System.Windows.Forms;
     using Abstractions;
     using Autodesk.Revit.DB;
@@ -10,32 +11,30 @@ namespace zfiFamilyRenameTool.Services
     using Revit;
     using View;
     using ViewModel;
-    using Application = Autodesk.Revit.ApplicationServices.Application;
-    using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 
     public class RevitService
     {
-        private readonly Application _app;
-        private readonly RevitEvent _event;
-        private List<IRenameableProvider> _providers;
+        private readonly Autodesk.Revit.ApplicationServices.Application _app;
+        private readonly RevitEvent _revitEvent;
 
-        public RevitService(Application app, RevitEvent @event)
+        public RevitService(Autodesk.Revit.ApplicationServices.Application app, RevitEvent revitEvent)
         {
             _app = app;
-            _event = @event;
+            _revitEvent = revitEvent;
 
             SetupProvides();
         }
 
         public event EventHandler<IEnumerable<LogMessage>> Renamed;
 
-        public List<IRenameableProvider> Providers => _providers;
+        public List<IRenameableProvider> Providers { get; private set; }
 
         public IReadOnlyCollection<Document> LoadDocs()
         {
             var logs = new List<LogMessage>();
             var documents = new List<Document>();
             var fileNames = GetFilesNames();
+            fileNames = CheckIsReadOnly(fileNames);
             foreach (var fileName in fileNames)
             {
                 try
@@ -59,7 +58,7 @@ namespace zfiFamilyRenameTool.Services
 
         public void Rename(IReadOnlyCollection<IRenameable> renameables)
         {
-            _event.Run(app =>
+            _revitEvent.Run(app =>
             {
                 var logs = new List<LogMessage>();
                 foreach (var renameable in renameables)
@@ -69,13 +68,13 @@ namespace zfiFamilyRenameTool.Services
                         renameable.Rename();
                         logs.Add(new LogMessage(
                             renameable.Title,
-                            $"Переименнован из {renameable.Source} в {renameable.Destination}"));
+                            $"Переименован из {renameable.Source} в {renameable.Destination}"));
                     }
                     catch
                     {
                         logs.Add(new LogMessage(
                             renameable.ToString(),
-                            $"Не удалось переимменовать"));
+                            $"Не удалось переименовать"));
                     }
                 }
 
@@ -90,14 +89,16 @@ namespace zfiFamilyRenameTool.Services
 
         private void SetupProvides()
         {
-            _providers = new List<IRenameableProvider>();
-            Providers.Add(new FamilyParametersProvider());
+            Providers = new List<IRenameableProvider>
+            {
+                new FamilyParametersProvider()
+            };
         }
 
         public void SaveAllDocs(IReadOnlyCollection<Document> docs)
         {
             var logs = new List<LogMessage>();
-            foreach (Document doc in docs)
+            foreach (var doc in docs)
             {
                 try
                 {
@@ -123,10 +124,8 @@ namespace zfiFamilyRenameTool.Services
             }
         }
 
-        private IReadOnlyCollection<string> GetFilesNames()
+        private IEnumerable<string> GetFilesNames()
         {
-            var result = new List<string>();
-
             var fbd = new FolderBrowserDialog();
 
             var taskDialog = new TaskDialog("Выбор файлов");
@@ -138,7 +137,7 @@ namespace zfiFamilyRenameTool.Services
             switch (taskDialogResult)
             {
                 case TaskDialogResult.CommandLink1:
-                    var ofd = new OpenFileDialog
+                    var ofd = new Microsoft.Win32.OpenFileDialog
                     {
                         Multiselect = true,
                         Filter = "Revit families (*.rfa) | *.rfa"
@@ -146,15 +145,14 @@ namespace zfiFamilyRenameTool.Services
 
                     if (ofd.ShowDialog() == true)
                     {
-                        result.AddRange(ofd.FileNames);
+                        return ofd.FileNames;
                     }
 
                     break;
                 case TaskDialogResult.CommandLink2:
                     if (fbd.ShowDialog() == DialogResult.OK)
                     {
-                        result.AddRange(Directory.EnumerateFiles(fbd.SelectedPath, "*.rfa",
-                            SearchOption.TopDirectoryOnly));
+                        return Directory.EnumerateFiles(fbd.SelectedPath, "*.rfa", SearchOption.TopDirectoryOnly);
                     }
 
                     break;
@@ -162,14 +160,49 @@ namespace zfiFamilyRenameTool.Services
                     fbd = new FolderBrowserDialog();
                     if (fbd.ShowDialog() == DialogResult.OK)
                     {
-                        result.AddRange(Directory.EnumerateFiles(fbd.SelectedPath, "*.rfa",
-                            SearchOption.AllDirectories));
+                        return Directory.EnumerateFiles(fbd.SelectedPath, "*.rfa", SearchOption.AllDirectories);
                     }
 
                     break;
             }
 
-            return result;
+            return new List<string>();
+        }
+
+        private IEnumerable<string> CheckIsReadOnly(IEnumerable<string> files)
+        {
+            files = files.ToList();
+            var fileInfos = files.Select(f => new FileInfo(f)).ToList();
+            if (fileInfos.Any(fi => fi.IsReadOnly))
+            {
+                if (ModPlusAPI.Windows.MessageBox.ShowYesNo("Set ReadOnly to false?"))
+                {
+                    foreach (var fileInfo in fileInfos)
+                    {
+                        if (fileInfo.IsReadOnly)
+                        {
+                            File.SetAttributes(fileInfo.FullName, File.GetAttributes(fileInfo.FullName) & ~FileAttributes.ReadOnly);
+                        }
+
+                        yield return fileInfo.FullName;
+                    }
+                }
+                else
+                {
+                    foreach (var fileInfo in fileInfos)
+                    {
+                        if (!fileInfo.IsReadOnly)
+                            yield return fileInfo.FullName;
+                    }
+                }
+            }
+            else
+            {
+                foreach (var file in files)
+                {
+                    yield return file;
+                }
+            }
         }
     }
 }

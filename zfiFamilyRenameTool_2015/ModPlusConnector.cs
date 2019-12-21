@@ -8,7 +8,7 @@
     {
         public SupportedProduct SupportedProduct => SupportedProduct.Revit;
 
-        public string Name => throw new NotImplementedException();
+        public string Name => "zfiFamilyRenameTool";
 
 #if R2015
         public string AvailProductExternalVersion => "2015";
@@ -24,36 +24,36 @@
         public string AvailProductExternalVersion => "2020";
 #endif
 
-        public string FullClassName => throw new NotImplementedException();
+        public string FullClassName => "zfiFamilyRenameTool.Revit.RenamerCommand";
 
-        public string AppFullClassName => throw new NotImplementedException();
+        public string AppFullClassName => string.Empty;
 
-        public Guid AddInId => throw new NotImplementedException();
+        public Guid AddInId => Guid.Empty;
 
-        public string LName => throw new NotImplementedException();
+        public string LName => "Bla-bla";
 
-        public string Description => throw new NotImplementedException();
+        public string Description => "Bla-bla-bla";
 
         public string Author => "Жеков Фёдор";
 
         public string Price => "0";
 
-        public bool CanAddToRibbon => throw new NotImplementedException();
+        public bool CanAddToRibbon => true;
 
-        public string FullDescription => throw new NotImplementedException();
+        public string FullDescription => "Bla-bla-bla-bla";
 
-        public string ToolTipHelpImage => throw new NotImplementedException();
+        public string ToolTipHelpImage => string.Empty;
 
-        public List<string> SubFunctionsNames => throw new NotImplementedException();
+        public List<string> SubFunctionsNames => new List<string>();
 
-        public List<string> SubFunctionsLames => throw new NotImplementedException();
+        public List<string> SubFunctionsLames => new List<string>();
 
-        public List<string> SubDescriptions => throw new NotImplementedException();
+        public List<string> SubDescriptions => new List<string>();
 
-        public List<string> SubFullDescriptions => throw new NotImplementedException();
+        public List<string> SubFullDescriptions => new List<string>();
 
-        public List<string> SubHelpImages => throw new NotImplementedException();
+        public List<string> SubHelpImages => new List<string>();
 
-        public List<string> SubClassNames => throw new NotImplementedException();
+        public List<string> SubClassNames => new List<string>();
     }
 }

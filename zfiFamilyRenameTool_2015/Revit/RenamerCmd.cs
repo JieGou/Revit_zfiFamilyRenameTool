@@ -11,7 +11,7 @@ namespace zfiFamilyRenameTool.Revit
 
     [Transaction(TransactionMode.Manual)]
     [Regeneration(RegenerationOption.Manual)]
-    public class RenamerCmd : IExternalCommand
+    public class RenamerCommand : IExternalCommand
     {
         /// <inheritdoc/>
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)

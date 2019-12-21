@@ -52,23 +52,22 @@
     <Compile Include="Abstractions\ICloseable.cs" />
     <Compile Include="Abstractions\IRenameable.cs" />
     <Compile Include="Abstractions\IRenameableProvider.cs" />
-    <Compile Include="Exceptions\PluginException.cs" />
     <Compile Include="ModPlusConnector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Revit\RenamerCmd.cs" />
+    <Compile Include="Revit\RenamerCommand.cs" />
     <Compile Include="Revit\RevitEvent.cs" />
     <Compile Include="Services\FamilyParametersProvider.cs" />
     <Compile Include="Services\FamilyParameterWrapper.cs" />
     <Compile Include="Services\RevitService.cs" />
-    <Compile Include="ViewModel\BodyVm.cs" />
+    <Compile Include="ViewModel\BodyViewModel.cs" />
     <Compile Include="ViewModel\Converters\BoolToColorConverter.cs" />
     <Compile Include="ViewModel\LogMessage.cs" />
-    <Compile Include="ViewModel\LogWindowVm.cs" />
-    <Compile Include="ViewModel\MainVm.cs" />
-    <Compile Include="ViewModel\OptionsVm.cs" />
-    <Compile Include="ViewModel\RenameableVm.cs" />
+    <Compile Include="ViewModel\LogWindowViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\OptionsViewModel.cs" />
+    <Compile Include="ViewModel\RenameableViewModel.cs" />
     <Compile Include="ViewModel\RenameOption.cs" />
-    <Compile Include="ViewModel\TabVm.cs" />
+    <Compile Include="ViewModel\TabViewModel.cs" />
     <Compile Include="View\Body.xaml.cs">
       <DependentUpon>Body.xaml</DependentUpon>
     </Compile>
@@ -99,15 +98,15 @@
   <ItemGroup>
     <PackageReference Include="ModPlus.Revit.API.2015">
       <Version>1.0.0</Version>
-	  <ExcludeAssets>runtime</ExcludeAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
     </PackageReference>
     <PackageReference Include="ModPlusAPI">
       <Version>1.3.1</Version>
-	  <ExcludeAssets>runtime</ExcludeAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
     </PackageReference>
     <PackageReference Include="ModPlusStyle">
       <Version>1.3.0</Version>
-	  <ExcludeAssets>runtime</ExcludeAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
     </PackageReference>
     <PackageReference Include="StyleCop.Analyzers">
       <Version>1.1.118</Version>
@@ -115,6 +114,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName) == Release (

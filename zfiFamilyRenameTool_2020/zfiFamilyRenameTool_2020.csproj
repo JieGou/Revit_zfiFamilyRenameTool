@@ -57,17 +57,14 @@
     <Compile Include="..\zfiFamilyRenameTool_2015\Abstractions\IRenameableProvider.cs">
       <Link>Abstractions\IRenameableProvider.cs</Link>
     </Compile>
-    <Compile Include="..\zfiFamilyRenameTool_2015\Exceptions\PluginException.cs">
-      <Link>Exceptions\PluginException.cs</Link>
-    </Compile>
     <Compile Include="..\zfiFamilyRenameTool_2015\ModPlusConnector.cs">
       <Link>ModPlusConnector.cs</Link>
     </Compile>
     <Compile Include="..\zfiFamilyRenameTool_2015\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="..\zfiFamilyRenameTool_2015\Revit\RenamerCmd.cs">
-      <Link>Revit\RenamerCmd.cs</Link>
+    <Compile Include="..\zfiFamilyRenameTool_2015\Revit\RenamerCommand.cs">
+      <Link>Revit\RenamerCommand.cs</Link>
     </Compile>
     <Compile Include="..\zfiFamilyRenameTool_2015\Revit\RevitEvent.cs">
       <Link>Revit\RevitEvent.cs</Link>
@@ -81,8 +78,8 @@
     <Compile Include="..\zfiFamilyRenameTool_2015\Services\RevitService.cs">
       <Link>Services\RevitService.cs</Link>
     </Compile>
-    <Compile Include="..\zfiFamilyRenameTool_2015\ViewModel\BodyVm.cs">
-      <Link>ViewModel\BodyVm.cs</Link>
+    <Compile Include="..\zfiFamilyRenameTool_2015\ViewModel\BodyViewModel.cs">
+      <Link>ViewModel\BodyViewModel.cs</Link>
     </Compile>
     <Compile Include="..\zfiFamilyRenameTool_2015\ViewModel\Converters\BoolToColorConverter.cs">
       <Link>ViewModel\Converters\BoolToColorConverter.cs</Link>
@@ -90,23 +87,23 @@
     <Compile Include="..\zfiFamilyRenameTool_2015\ViewModel\LogMessage.cs">
       <Link>ViewModel\LogMessage.cs</Link>
     </Compile>
-    <Compile Include="..\zfiFamilyRenameTool_2015\ViewModel\LogWindowVm.cs">
-      <Link>ViewModel\LogWindowVm.cs</Link>
+    <Compile Include="..\zfiFamilyRenameTool_2015\ViewModel\LogWindowViewModel.cs">
+      <Link>ViewModel\LogWindowViewModel.cs</Link>
     </Compile>
-    <Compile Include="..\zfiFamilyRenameTool_2015\ViewModel\MainVm.cs">
-      <Link>ViewModel\MainVm.cs</Link>
+    <Compile Include="..\zfiFamilyRenameTool_2015\ViewModel\MainViewModel.cs">
+      <Link>ViewModel\MainViewModel.cs</Link>
     </Compile>
-    <Compile Include="..\zfiFamilyRenameTool_2015\ViewModel\OptionsVm.cs">
-      <Link>ViewModel\OptionsVm.cs</Link>
+    <Compile Include="..\zfiFamilyRenameTool_2015\ViewModel\OptionsViewModel.cs">
+      <Link>ViewModel\OptionsViewModel.cs</Link>
     </Compile>
-    <Compile Include="..\zfiFamilyRenameTool_2015\ViewModel\RenameableVm.cs">
-      <Link>ViewModel\RenameableVm.cs</Link>
+    <Compile Include="..\zfiFamilyRenameTool_2015\ViewModel\RenameableViewModel.cs">
+      <Link>ViewModel\RenameableViewModel.cs</Link>
     </Compile>
     <Compile Include="..\zfiFamilyRenameTool_2015\ViewModel\RenameOption.cs">
       <Link>ViewModel\RenameOption.cs</Link>
     </Compile>
-    <Compile Include="..\zfiFamilyRenameTool_2015\ViewModel\TabVm.cs">
-      <Link>ViewModel\TabVm.cs</Link>
+    <Compile Include="..\zfiFamilyRenameTool_2015\ViewModel\TabViewModel.cs">
+      <Link>ViewModel\TabViewModel.cs</Link>
     </Compile>
     <Compile Include="..\zfifamilyrenametool_2015\view\Body.xaml.cs">
       <Link>View\Body.xaml.cs</Link>

@@ -1,9 +1,9 @@
 namespace zfiFamilyRenameTool.Services
 {
+    using System;
     using System.Collections.Generic;
     using Abstractions;
     using Autodesk.Revit.DB;
-    using Exceptions;
 
     public class FamilyParametersProvider : IRenameableProvider
     {
@@ -13,7 +13,7 @@ namespace zfiFamilyRenameTool.Services
         {
             if (!doc.IsFamilyDocument)
             {
-                throw new PluginException("Документ не является семейством");
+                throw new ArgumentException("Документ не является семейством");
             }
 
             var fm = doc.FamilyManager;

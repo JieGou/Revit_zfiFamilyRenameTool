@@ -1,10 +1,11 @@
 namespace zfiFamilyRenameTool.ViewModel
 {
     using System.Collections.Generic;
-    using System.Windows;
     using System.Windows.Input;
     using Abstractions;
     using ModPlusAPI.Mvvm;
+    using ModPlusAPI.Windows;
+    using Revit;
     using Services;
     using View;
 
@@ -44,12 +45,13 @@ namespace zfiFamilyRenameTool.ViewModel
             var docs = _service.LoadDocs();
             if (docs.Count == 0)
             {
-                MessageBox.Show("Не выбранно ни одного файла семейства!", "Внимание!", MessageBoxButton.OK,
-                    MessageBoxImage.Information);
+                MessageBox.Show("Не выбрано ни одного файла семейства!", MessageBoxIcon.Alert);
                 return;
             }
 
             Body = new BodyViewModel(_service, docs, Options);
+
+            RenamerCommand.RenamerWindow.Activate();
         }
 
         private void CloseAndApply(ICloseable closeable)
@@ -74,13 +76,13 @@ namespace zfiFamilyRenameTool.ViewModel
             _service.Renamed += SaveAnShowLogs;
             Apply();
         }
-        
+
         private void Apply()
         {
             var renameables = Body.GetRenameables();
             if (renameables.Count == 0)
             {
-                MessageBox.Show("Ничего не выбранно!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Ничего не выбрано!", MessageBoxIcon.Alert);
                 return;
             }
 
@@ -92,6 +94,7 @@ namespace zfiFamilyRenameTool.ViewModel
             LogWindow.ShowLogs(e);
             _service.SaveAllDocs(_body.Docs);
             _service.Renamed -= SaveAnShowLogs;
+            Body.ReloadRenameables();
         }
     }
 }

@@ -1,9 +1,8 @@
 namespace zfiFamilyRenameTool.View
 {
-    using System.Windows;
     using Abstractions;
 
-    public partial class RenamerWindow : Window, ICloseable
+    public partial class RenamerWindow : ICloseable
     {
         public RenamerWindow()
         {
