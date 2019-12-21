@@ -5,6 +5,7 @@ namespace zfiFamilyRenameTool.ViewModel
     using System.Linq;
     using Abstractions;
     using ModPlusAPI.Mvvm;
+    using Services;
 
     public class RenameableViewModel : VmBase, IRenameable
     {
@@ -31,6 +32,30 @@ namespace zfiFamilyRenameTool.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        public string ParameterName
+        {
+            get
+            {
+                var r = _renameable.FirstOrDefault();
+                if (r is FamilyParameterValueWrapper v)
+                    return v.ParameterName;
+                return null;
+            }
+        }
+
+        public string FamilyTypeName
+        {
+            get
+            {
+                var r = _renameable.FirstOrDefault();
+                if (r is FamilyParameterValueWrapper v)
+                    return v.FamilyTypeName;
+                return null;
+            }
+        }
+
+        public string GroupCondition => _renameable.First().GroupCondition;
 
         public bool IsChecked
         {

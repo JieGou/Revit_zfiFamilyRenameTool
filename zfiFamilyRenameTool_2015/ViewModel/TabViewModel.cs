@@ -6,6 +6,7 @@ namespace zfiFamilyRenameTool.ViewModel
     using Abstractions;
     using Autodesk.Revit.DB;
     using ModPlusAPI.Mvvm;
+    using Services;
 
     public class TabViewModel : VmBase
     {
@@ -20,18 +21,20 @@ namespace zfiFamilyRenameTool.ViewModel
             _docs = docs;
             _optionsViewModel = optionsViewModel;
 
+            if (provider is FamilyParameterValuesProvider)
+            {
+                ParameterNameVisibility = System.Windows.Visibility.Visible;
+                FamilyTypeVisibility = System.Windows.Visibility.Visible;
+            }
+            else
+            {
+                ParameterNameVisibility = System.Windows.Visibility.Collapsed;
+                FamilyTypeVisibility = System.Windows.Visibility.Collapsed;
+            }
+
             Renameables = new ObservableCollection<RenameableViewModel>();
 
-            foreach (var doc in _docs)
-            {
-                var renameables = _provider.GetRenameables(doc);
-                foreach (var renameableVm in renameables.GroupBy(x => x.Source)
-                    .Select(x => new RenameableViewModel(x.ToList())))
-                {
-                    renameableVm.Checked += (sender, b) => OptionsVmOnPropertyChanged();
-                    Renameables.Add(renameableVm);
-                }
-            }
+            FillRenameables();
 
             _optionsViewModel.PropertyChanged += (s, e) => OptionsVmOnPropertyChanged();
         }
@@ -39,6 +42,10 @@ namespace zfiFamilyRenameTool.ViewModel
         public ObservableCollection<RenameableViewModel> Renameables { get; }
 
         public string Title => _provider.Name;
+
+        public System.Windows.Visibility ParameterNameVisibility { get; set; }
+
+        public System.Windows.Visibility FamilyTypeVisibility { get; set; }
 
         public bool AllSelected
         {
@@ -59,16 +66,7 @@ namespace zfiFamilyRenameTool.ViewModel
         {
             Renameables.Clear();
 
-            foreach (var doc in _docs)
-            {
-                var renameables = _provider.GetRenameables(doc);
-                foreach (var renameableVm in renameables.GroupBy(x => x.Source)
-                    .Select(x => new RenameableViewModel(x.ToList())))
-                {
-                    renameableVm.Checked += (sender, b) => OptionsVmOnPropertyChanged();
-                    Renameables.Add(renameableVm);
-                }
-            }
+            FillRenameables();
 
             AllSelected = false;
         }
@@ -78,6 +76,23 @@ namespace zfiFamilyRenameTool.ViewModel
             Renameables.Where(x => x.IsChecked)
                 .ToList()
                 .ForEach(_optionsViewModel.Rename);
+        }
+
+        private void FillRenameables()
+        {
+            var renameables = new List<IRenameable>();
+            foreach (var doc in _docs)
+            {
+                renameables.AddRange(_provider.GetRenameables(doc));
+            }
+
+            foreach (var renameableVm in renameables
+                .GroupBy(x => x.GroupCondition)
+                .Select(x => new RenameableViewModel(x.ToList())))
+            {
+                renameableVm.Checked += (sender, b) => OptionsVmOnPropertyChanged();
+                Renameables.Add(renameableVm);
+            }
         }
     }
 }

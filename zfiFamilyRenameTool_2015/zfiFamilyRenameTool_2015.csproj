@@ -57,7 +57,11 @@
     <Compile Include="Revit\RenamerCommand.cs" />
     <Compile Include="Revit\RevitEvent.cs" />
     <Compile Include="Services\FamilyParametersProvider.cs" />
+    <Compile Include="Services\FamilyParameterValuesProvider.cs" />
+    <Compile Include="Services\FamilyParameterValueWrapper.cs" />
     <Compile Include="Services\FamilyParameterWrapper.cs" />
+    <Compile Include="Services\FamilyTypesProvider.cs" />
+    <Compile Include="Services\FamilyTypeWrapper.cs" />
     <Compile Include="Services\RevitService.cs" />
     <Compile Include="ViewModel\BodyViewModel.cs" />
     <Compile Include="ViewModel\Converters\BoolToColorConverter.cs" />
@@ -68,6 +72,7 @@
     <Compile Include="ViewModel\RenameableViewModel.cs" />
     <Compile Include="ViewModel\RenameOption.cs" />
     <Compile Include="ViewModel\TabViewModel.cs" />
+    <Compile Include="View\BindingProxy.cs" />
     <Compile Include="View\Body.xaml.cs">
       <DependentUpon>Body.xaml</DependentUpon>
     </Compile>

@@ -73,8 +73,20 @@
     <Compile Include="..\zfiFamilyRenameTool_2015\Services\FamilyParametersProvider.cs">
       <Link>Services\FamilyParametersProvider.cs</Link>
     </Compile>
+    <Compile Include="..\zfiFamilyRenameTool_2015\Services\FamilyParameterValuesProvider.cs">
+      <Link>Services\FamilyParameterValuesProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\zfiFamilyRenameTool_2015\Services\FamilyParameterValueWrapper.cs">
+      <Link>Services\FamilyParameterValueWrapper.cs</Link>
+    </Compile>
     <Compile Include="..\zfiFamilyRenameTool_2015\Services\FamilyParameterWrapper.cs">
       <Link>Services\FamilyParameterWrapper.cs</Link>
+    </Compile>
+    <Compile Include="..\zfiFamilyRenameTool_2015\Services\FamilyTypesProvider.cs">
+      <Link>Services\FamilyTypesProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\zfiFamilyRenameTool_2015\Services\FamilyTypeWrapper.cs">
+      <Link>Services\FamilyTypeWrapper.cs</Link>
     </Compile>
     <Compile Include="..\zfiFamilyRenameTool_2015\Services\RevitService.cs">
       <Link>Services\RevitService.cs</Link>
@@ -105,6 +117,9 @@
     </Compile>
     <Compile Include="..\zfiFamilyRenameTool_2015\ViewModel\TabViewModel.cs">
       <Link>ViewModel\TabViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\zfiFamilyRenameTool_2015\View\BindingProxy.cs">
+      <Link>View\BindingProxy.cs</Link>
     </Compile>
     <Compile Include="..\zfiFamilyRenameTool_2015\View\Body.xaml.cs">
       <Link>View\Body.xaml.cs</Link>

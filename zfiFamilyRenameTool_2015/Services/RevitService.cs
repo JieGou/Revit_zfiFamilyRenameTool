@@ -91,7 +91,9 @@ namespace zfiFamilyRenameTool.Services
         {
             Providers = new List<IRenameableProvider>
             {
-                new FamilyParametersProvider()
+                new FamilyParametersProvider(),
+                new FamilyTypesProvider(),
+                new FamilyParameterValuesProvider()
             };
         }
 
@@ -104,9 +106,9 @@ namespace zfiFamilyRenameTool.Services
                 {
                     doc.Save();
                 }
-                catch
+                catch (Exception exception)
                 {
-                    logs.Add(new LogMessage("Не удалось сохранить документ", doc.PathName, true));
+                    logs.Add(new LogMessage("Не удалось сохранить документ", $"{doc.PathName} - {exception.Message}", true));
                 }
             }
 

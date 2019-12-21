@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModel="clr-namespace:zfiFamilyRenameTool.ViewModel"
              xmlns:mps="https://modplus.org/winfx/xaml/controls"
+             xmlns:view="clr-namespace:zfiFamilyRenameTool.View"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=viewModel:BodyViewModel, IsDesignTimeCreatable=False}"
              d:DesignHeight="300" d:DesignWidth="300">
@@ -17,30 +18,45 @@
                 <TextBlock Text="{Binding Path=Title}" />
             </DataTemplate>
             <DataTemplate x:Key="TabContentTemplate" DataType="viewModel:TabViewModel">
-                <ListView ItemsSource="{Binding Renameables}" Margin="-3 3 -3 -3"
-                          mps:ListViewAssist.ListViewItemPadding="2 4">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn>
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate DataType="viewModel:RenameableViewModel">
-                                        <CheckBox IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}" Margin="0" />
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                                <CheckBox IsChecked="{Binding AllSelected, UpdateSourceTrigger=PropertyChanged}" Margin="0" />
-                            </GridViewColumn>
-                            <GridViewColumn Header="Исходное значение" DisplayMemberBinding="{Binding Source}" />
-                            <GridViewColumn Header="Результат" DisplayMemberBinding="{Binding Destination}" />
-                        </GridView>
-                    </ListView.View>
-                </ListView>
+                <DataGrid ItemsSource="{Binding Path=Renameables}"
+                          AutoGenerateColumns="False" CanUserAddRows="False"
+                          CanUserDeleteRows="False" CanUserReorderColumns="False"
+                          CanUserSortColumns="True"
+                          mps:DataGridAssist.CellPadding="2 4" mps:DataGridAssist.ColumnHeaderPadding="2 4">
+                    <DataGrid.Resources>
+                        <view:BindingProxy x:Key="BindingProxy" Data="{Binding}"></view:BindingProxy>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.Header>
+                                <CheckBox IsChecked="{Binding Path=Data.AllSelected, Source={StaticResource BindingProxy}, UpdateSourceTrigger=PropertyChanged}" Margin="0" />
+                            </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate DataType="viewModel:RenameableViewModel">
+                                    <CheckBox IsChecked="{Binding Path=IsChecked, UpdateSourceTrigger=PropertyChanged}" Margin="0" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn IsReadOnly="True" Header="Имя параметра"
+                                            Visibility="{Binding Path=Data.ParameterNameVisibility, Source={StaticResource BindingProxy}}"
+                                            Binding="{Binding Path=ParameterName}"></DataGridTextColumn>
+                        <DataGridTextColumn IsReadOnly="True" Header="Имя типоразмера"
+                                            Visibility="{Binding Path=Data.FamilyTypeVisibility, Source={StaticResource BindingProxy}}"
+                                            Binding="{Binding Path=FamilyTypeName}"></DataGridTextColumn>
+                        <DataGridTextColumn IsReadOnly="True" Header="Исходное значение"
+                                            Binding="{Binding Path=Source}"></DataGridTextColumn>
+                        <DataGridTextColumn IsReadOnly="True" Header="Результат" Width="*"
+                                            Binding="{Binding Path=Destination}"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
             </DataTemplate>
         </ResourceDictionary>
     </UserControl.Resources>
     <TabControl
-        ItemsSource="{Binding Tabs}" 
+        ItemsSource="{Binding Path=Tabs}" 
         ItemTemplate="{StaticResource TabHeaderTemplate}"
         ContentTemplate="{StaticResource TabContentTemplate}"
         SelectedIndex="0"
-        mps:ControlsAssist.HeaderFontSize="14"/>
+        mps:ControlsAssist.HeaderFontSize="14">
+    </TabControl>
 </UserControl>

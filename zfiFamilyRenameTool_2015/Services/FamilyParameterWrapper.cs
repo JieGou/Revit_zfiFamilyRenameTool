@@ -12,7 +12,7 @@ namespace zfiFamilyRenameTool.Services
         {
             _parameter = parameter;
             _doc = doc;
-            Title = $"Параметр '{_parameter.Definition.Name}'";
+            Title = $"Параметр \"{_parameter.Definition.Name}\"";
             Source = _parameter.Definition.Name;
         }
 
@@ -21,6 +21,8 @@ namespace zfiFamilyRenameTool.Services
         public string Source { get; }
 
         public string Destination { get; set; } = string.Empty;
+
+        public string GroupCondition => Source;
 
         public void Rename()
         {

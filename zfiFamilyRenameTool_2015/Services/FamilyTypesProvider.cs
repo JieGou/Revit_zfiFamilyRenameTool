@@ -1,13 +1,13 @@
-namespace zfiFamilyRenameTool.Services
+﻿namespace zfiFamilyRenameTool.Services
 {
     using System;
     using System.Collections.Generic;
     using Abstractions;
     using Autodesk.Revit.DB;
 
-    public class FamilyParametersProvider : IRenameableProvider
+    public class FamilyTypesProvider : IRenameableProvider
     {
-        public string Name => "Имена параметров";
+        public string Name => "Имена типоразмеров";
 
         public IEnumerable<IRenameable> GetRenameables(Document doc)
         {
@@ -18,14 +18,12 @@ namespace zfiFamilyRenameTool.Services
 
             var fm = doc.FamilyManager;
 
-            foreach (FamilyParameter p in fm.Parameters)
+            foreach (FamilyType fmType in fm.Types)
             {
-                if (p.IsShared || p.IsReadOnly || p.Id.IntegerValue < 0)
-                {
+                if (string.IsNullOrWhiteSpace(fmType.Name))
                     continue;
-                }
 
-                yield return new FamilyParameterWrapper(p, doc);
+                yield return new FamilyTypeWrapper(fmType, doc);
             }
         }
     }
