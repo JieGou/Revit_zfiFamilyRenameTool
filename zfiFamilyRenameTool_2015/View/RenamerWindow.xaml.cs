@@ -7,6 +7,8 @@ namespace zfiFamilyRenameTool.View
         public RenamerWindow()
         {
             InitializeComponent();
+
+            Title = ModPlusAPI.Language.GetFunctionLocalName(ModPlusConnector.Instance);
         }
     }
 }

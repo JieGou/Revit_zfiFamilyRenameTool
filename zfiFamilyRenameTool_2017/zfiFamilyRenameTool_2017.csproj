@@ -94,9 +94,6 @@
     <Compile Include="..\zfiFamilyRenameTool_2015\ViewModel\BodyViewModel.cs">
       <Link>ViewModel\BodyViewModel.cs</Link>
     </Compile>
-    <Compile Include="..\zfiFamilyRenameTool_2015\ViewModel\Converters\BoolToColorConverter.cs">
-      <Link>ViewModel\Converters\BoolToColorConverter.cs</Link>
-    </Compile>
     <Compile Include="..\zfiFamilyRenameTool_2015\ViewModel\LogMessage.cs">
       <Link>ViewModel\LogMessage.cs</Link>
     </Compile>

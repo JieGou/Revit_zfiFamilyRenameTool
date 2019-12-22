@@ -64,7 +64,6 @@
     <Compile Include="Services\FamilyTypeWrapper.cs" />
     <Compile Include="Services\RevitService.cs" />
     <Compile Include="ViewModel\BodyViewModel.cs" />
-    <Compile Include="ViewModel\Converters\BoolToColorConverter.cs" />
     <Compile Include="ViewModel\LogMessage.cs" />
     <Compile Include="ViewModel\LogWindowViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />

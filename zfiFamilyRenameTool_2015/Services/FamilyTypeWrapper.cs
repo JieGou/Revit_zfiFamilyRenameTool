@@ -1,7 +1,9 @@
 ﻿namespace zfiFamilyRenameTool.Services
 {
+    using System.Linq;
     using Abstractions;
     using Autodesk.Revit.DB;
+    using ModPlusAPI;
 
     public class FamilyTypeWrapper : IRenameable
     {
@@ -12,7 +14,9 @@
         {
             _familyType = familyType;
             _doc = doc;
-            Title = $"Типоразмер \"{familyType.Name}\"";
+
+            // Типоразмер \"{familyType.Name}\"
+            Title = string.Format(Language.GetItem(ModPlusConnector.Instance.Name, "p5"), familyType.Name);
             Source = familyType.Name;
         }
 
@@ -26,6 +30,11 @@
 
         public void Rename()
         {
+            if (_doc.FamilyManager.Types.Cast<FamilyType>().Any(type => type.Name == Destination))
+            {
+                return;
+            }
+
             using (var t = new Transaction(_doc, $"Rename {Source} type"))
             {
                 t.Start();

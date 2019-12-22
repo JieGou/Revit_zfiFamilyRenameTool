@@ -15,6 +15,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/ModPlusStyle;component/Styles/Controls.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <XmlDataProvider x:Key="Lang" Source="E:/ModPlus/Languages/en-US.xml" XPath="ModPlus/zfiFamilyRenameTool" />
         </ResourceDictionary>
     </Window.Resources>
     <i:Interaction.Triggers>
@@ -48,21 +49,18 @@
             </Grid.ColumnDefinitions>
 
             <Button Grid.Column="0" 
+                    Content="{Binding Source={StaticResource Lang}, XPath=h1}"
                     Command="{Binding Path=OpenFamiliesCommand}"
-                    HorizontalAlignment="Left">
-                Выбрать семейства
-            </Button>
+                    HorizontalAlignment="Left"/>
 
             <Button Grid.Column="1"
-                    Command="{Binding Path=ApplyCommand}">
-                Применить
-            </Button>
+                    Content="{Binding Source={StaticResource Lang}, XPath=h2}"
+                    Command="{Binding Path=ApplyCommand}"/>
 
             <Button Grid.Column="2"
+                    Content="{Binding Source={StaticResource Lang}, XPath=h3}"
                     Command="{Binding CloseAndApplyCommand}"
-                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
-                Применить и закрыть
-            </Button>
+                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
         </Grid>
     </Grid>
 </mps:ModPlusWindow>

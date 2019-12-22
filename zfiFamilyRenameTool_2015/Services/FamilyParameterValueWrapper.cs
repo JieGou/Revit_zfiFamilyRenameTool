@@ -3,6 +3,7 @@
     using System.Globalization;
     using Abstractions;
     using Autodesk.Revit.DB;
+    using ModPlusAPI;
 
     public class FamilyParameterValueWrapper : IRenameable
     {
@@ -15,7 +16,9 @@
             _parameter = parameter;
             _familyType = familyType;
             _doc = doc;
-            Title = $"Значение параметра \"{parameter.Definition.Name}\"";
+
+            // Значение параметра \"{parameter.Definition.Name}\"
+            Title = string.Format(Language.GetItem(ModPlusConnector.Instance.Name, "p4"), parameter.Definition.Name);
             ParameterName = parameter.Definition.Name;
             FamilyTypeName = familyType.Name;
             switch (parameter.StorageType)

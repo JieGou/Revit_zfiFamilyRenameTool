@@ -2,6 +2,7 @@ namespace zfiFamilyRenameTool.Services
 {
     using Abstractions;
     using Autodesk.Revit.DB;
+    using ModPlusAPI;
 
     public class FamilyParameterWrapper : IRenameable
     {
@@ -12,7 +13,9 @@ namespace zfiFamilyRenameTool.Services
         {
             _parameter = parameter;
             _doc = doc;
-            Title = $"Параметр \"{_parameter.Definition.Name}\"";
+
+            // Параметр \"{_parameter.Definition.Name}\"
+            Title = string.Format(Language.GetItem(ModPlusConnector.Instance.Name, "p5"), parameter.Definition.Name);
             Source = _parameter.Definition.Name;
         }
 

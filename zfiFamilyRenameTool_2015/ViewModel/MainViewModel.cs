@@ -3,6 +3,7 @@ namespace zfiFamilyRenameTool.ViewModel
     using System.Collections.Generic;
     using System.Windows.Input;
     using Abstractions;
+    using ModPlusAPI;
     using ModPlusAPI.Mvvm;
     using ModPlusAPI.Windows;
     using Revit;
@@ -45,7 +46,8 @@ namespace zfiFamilyRenameTool.ViewModel
             var docs = _service.LoadDocs();
             if (docs.Count == 0)
             {
-                MessageBox.Show("Не выбрано ни одного файла семейства!", MessageBoxIcon.Alert);
+                // Не выбрано ни одного файла семейства!
+                MessageBox.Show(Language.GetItem(ModPlusConnector.Instance.Name, "msg4"), MessageBoxIcon.Alert);
                 return;
             }
 
@@ -82,7 +84,8 @@ namespace zfiFamilyRenameTool.ViewModel
             var renameables = Body.GetRenameables();
             if (renameables.Count == 0)
             {
-                MessageBox.Show("Ничего не выбрано!", MessageBoxIcon.Alert);
+                // Не выбрано значений для изменения!
+                MessageBox.Show(Language.GetItem(ModPlusConnector.Instance.Name, "msg5"), MessageBoxIcon.Alert);
                 return;
             }
 

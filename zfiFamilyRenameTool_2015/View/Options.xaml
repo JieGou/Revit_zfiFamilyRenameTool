@@ -8,12 +8,12 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=viewModel:OptionsViewModel, IsDesignTimeCreatable=False}"
              MinWidth="250">
-
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/ModPlusStyle;component/Styles/Controls.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <XmlDataProvider x:Key="Lang" Source="E:/ModPlus/Languages/en-US.xml" XPath="ModPlus/zfiFamilyRenameTool" />
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -21,7 +21,8 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <GroupBox Grid.Row="0" Header="Префикс/Суффикс">
+        <!-- prefix/suffix -->
+        <GroupBox Grid.Row="0" Header="{Binding Source={StaticResource Lang}, XPath=h4}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -31,8 +32,12 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" Content="Префикс:" />
-                <Label Grid.Row="1" Grid.Column="0" Content="Суффикс:" />
+                <!-- prefix -->
+                <TextBlock Grid.Row="0" Grid.Column="0" 
+                           Text="{Binding Source={StaticResource Lang}, XPath=h5}" />
+                <!-- suffix -->
+                <TextBlock Grid.Row="1" Grid.Column="0"
+                           Text="{Binding Source={StaticResource Lang}, XPath=h6}" />
 
                 <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Prefix, UpdateSourceTrigger=PropertyChanged}"
                          mps:TextFieldAssist.ClearTextButton="True" />
@@ -41,7 +46,8 @@
             </Grid>
         </GroupBox>
 
-        <GroupBox Grid.Row="1" Header="Поиск и замена">
+        <!-- Search and replace -->
+        <GroupBox Grid.Row="1" Header="{Binding Source={StaticResource Lang}, XPath=h7}">
             <StackPanel>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -52,8 +58,12 @@
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Row="0" Grid.Column="0" Content="Найти:" />
-                    <Label Grid.Row="1" Grid.Column="0" Content="Заменить на:" />
+                    <!-- Найти: -->
+                    <TextBlock Grid.Row="0" Grid.Column="0"
+                               Text="{Binding Source={StaticResource Lang}, XPath=h8}" />
+                    <!-- Заменить на: -->
+                    <TextBlock Grid.Row="1" Grid.Column="0" 
+                               Text="{Binding Source={StaticResource Lang}, XPath=h9}" />
 
                     <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Find, UpdateSourceTrigger=PropertyChanged}"
                              mps:TextFieldAssist.ClearTextButton="True" />
@@ -61,28 +71,34 @@
                              Text="{Binding ReplaceValue, UpdateSourceTrigger=PropertyChanged}" />
                 </Grid>
 
-                <CheckBox IsChecked="{Binding IsCaseSensitive}">Не учитывать регистр</CheckBox>
+                <!-- Не учитывать регистр -->
+                <CheckBox IsChecked="{Binding Path=IsCaseSensitive}"
+                          Content="{Binding Source={StaticResource Lang}, XPath=h10}"></CheckBox>
 
+                <!-- Начинается с -->
                 <RadioButton IsChecked="True" Command="{Binding OptionCheckedCmd}"
-                             CommandParameter="StartWith">
-                    Начинается с
-                </RadioButton>
+                             Content="{Binding Source={StaticResource Lang}, XPath=h11}"
+                             CommandParameter="StartWith"/>
+
+                <!-- Заканчивается на -->
                 <RadioButton Command="{Binding OptionCheckedCmd}"
-                             CommandParameter="EndWith">
-                    Заканчивается на
-                </RadioButton>
+                             Content="{Binding Source={StaticResource Lang}, XPath=h12}"
+                             CommandParameter="EndWith"/>
+
+                <!-- Содержит -->
                 <RadioButton Command="{Binding OptionCheckedCmd}"
-                             CommandParameter="Contains">
-                    Содержит
-                </RadioButton>
+                             Content="{Binding Source={StaticResource Lang}, XPath=h13}"
+                             CommandParameter="Contains"/>
+
+                <!-- Полное совпадение -->
                 <RadioButton Command="{Binding OptionCheckedCmd}"
-                             CommandParameter="MatchesWhole">
-                    Полное совпадение
-                </RadioButton>
+                             Content="{Binding Source={StaticResource Lang}, XPath=h14}"
+                             CommandParameter="MatchesWhole"/>
+
+                <!-- Регулярное выражение -->
                 <RadioButton Command="{Binding OptionCheckedCmd}"
-                             CommandParameter="Regex">
-                    Регулярное выражение
-                </RadioButton>
+                             Content="{Binding Source={StaticResource Lang}, XPath=h15}"
+                             CommandParameter="Regex"/>
             </StackPanel>
         </GroupBox>
     </Grid>

@@ -8,6 +8,7 @@ namespace zfiFamilyRenameTool.Services
     using Abstractions;
     using Autodesk.Revit.DB;
     using Autodesk.Revit.UI;
+    using ModPlusAPI;
     using Revit;
     using View;
     using ViewModel;
@@ -16,6 +17,7 @@ namespace zfiFamilyRenameTool.Services
     {
         private readonly Autodesk.Revit.ApplicationServices.Application _app;
         private readonly RevitEvent _revitEvent;
+        private readonly string _langItem = ModPlusConnector.Instance.Name;
 
         public RevitService(Autodesk.Revit.ApplicationServices.Application app, RevitEvent revitEvent)
         {
@@ -42,9 +44,10 @@ namespace zfiFamilyRenameTool.Services
                     var doc = _app.OpenDocumentFile(fileName);
                     documents.Add(doc);
                 }
-                catch
+                catch (Exception exception)
                 {
-                    logs.Add(new LogMessage("Не удалось загрузить документ", fileName, true));
+                    // Не удалось загрузить документ
+                    logs.Add(new LogMessage(Language.GetItem(_langItem, "err2"), $"{fileName} - {exception.Message}", true));
                 }
             }
 
@@ -66,15 +69,18 @@ namespace zfiFamilyRenameTool.Services
                     try
                     {
                         renameable.Rename();
+
+                        // Выполнено изменение значения с "{0}" на "{1}"
                         logs.Add(new LogMessage(
                             renameable.Title,
-                            $"Переименован из {renameable.Source} в {renameable.Destination}"));
+                            string.Format(Language.GetItem(_langItem, "msg1"), renameable.Source, renameable.Destination)));
                     }
-                    catch
+                    catch (Exception exception)
                     {
+                        // Failed to change value
                         logs.Add(new LogMessage(
-                            renameable.ToString(),
-                            $"Не удалось переименовать"));
+                            renameable.Title,
+                            $"{Language.GetItem(_langItem, "msg2")} - {exception.Message}"));
                     }
                 }
 
@@ -108,7 +114,9 @@ namespace zfiFamilyRenameTool.Services
                 }
                 catch (Exception exception)
                 {
-                    logs.Add(new LogMessage("Не удалось сохранить документ", $"{doc.PathName} - {exception.Message}", true));
+                    // Не удалось сохранить документ
+                    logs.Add(new LogMessage(
+                        Language.GetItem(_langItem, "err3"), $"{doc.PathName} - {exception.Message}", true));
                 }
             }
 
@@ -130,10 +138,17 @@ namespace zfiFamilyRenameTool.Services
         {
             var fbd = new FolderBrowserDialog();
 
-            var taskDialog = new TaskDialog("Выбор файлов");
-            taskDialog.AddCommandLink(TaskDialogCommandLinkId.CommandLink1, "Выбрать файлы");
-            taskDialog.AddCommandLink(TaskDialogCommandLinkId.CommandLink2, "Выбрать папку");
-            taskDialog.AddCommandLink(TaskDialogCommandLinkId.CommandLink3, "Выбрать папку включая вложенные");
+            // Выбрать семейства
+            var taskDialog = new TaskDialog(Language.GetItem(_langItem, "h1"));
+
+            // Выбрать файлы
+            taskDialog.AddCommandLink(TaskDialogCommandLinkId.CommandLink1, Language.GetItem(_langItem, "h20"));
+
+            // Выбрать папку
+            taskDialog.AddCommandLink(TaskDialogCommandLinkId.CommandLink2, Language.GetItem(_langItem, "h21"));
+
+            // Выбрать папку включая вложенные
+            taskDialog.AddCommandLink(TaskDialogCommandLinkId.CommandLink3, Language.GetItem(_langItem, "h22"));
             var taskDialogResult = taskDialog.Show();
 
             switch (taskDialogResult)
@@ -142,7 +157,9 @@ namespace zfiFamilyRenameTool.Services
                     var ofd = new Microsoft.Win32.OpenFileDialog
                     {
                         Multiselect = true,
-                        Filter = "Revit families (*.rfa) | *.rfa"
+
+                        // Семейства Revit
+                        Filter = $"{Language.GetItem(_langItem, "h23")} (*.rfa) | *.rfa"
                     };
 
                     if (ofd.ShowDialog() == true)
@@ -177,7 +194,9 @@ namespace zfiFamilyRenameTool.Services
             var fileInfos = files.Select(f => new FileInfo(f)).ToList();
             if (fileInfos.Any(fi => fi.IsReadOnly))
             {
-                if (ModPlusAPI.Windows.MessageBox.ShowYesNo("Set ReadOnly to false?"))
+                // Среди выбранных файлов семейств имеются файлы со свойством «Только для чтения».
+                // Эти файлы невозможно будет сохранить. Отключить для этих файлов свойство «Только для чтения»?
+                if (ModPlusAPI.Windows.MessageBox.ShowYesNo(Language.GetItem(_langItem, "msg3")))
                 {
                     foreach (var fileInfo in fileInfos)
                     {

@@ -4,16 +4,19 @@ namespace zfiFamilyRenameTool.Services
     using System.Collections.Generic;
     using Abstractions;
     using Autodesk.Revit.DB;
+    using ModPlusAPI;
 
     public class FamilyParametersProvider : IRenameableProvider
     {
-        public string Name => "Имена параметров";
+        // Имена параметров
+        public string Name => Language.GetItem(ModPlusConnector.Instance.Name, "p1");
 
         public IEnumerable<IRenameable> GetRenameables(Document doc)
         {
             if (!doc.IsFamilyDocument)
             {
-                throw new ArgumentException($"Документ {doc.Title} не является семейством");
+                // Документ \"{doc.Title}\" не является семейством
+                throw new ArgumentException(string.Format(Language.GetItem(ModPlusConnector.Instance.Name, "err1"), doc.Title));
             }
 
             var fm = doc.FamilyManager;

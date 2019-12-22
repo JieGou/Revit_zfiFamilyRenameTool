@@ -14,6 +14,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/ModPlusStyle;component/Styles/Controls.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <XmlDataProvider x:Key="Lang" Source="E:/ModPlus/Languages/en-US.xml" XPath="ModPlus/zfiFamilyRenameTool" />
             <DataTemplate x:Key="TabHeaderTemplate" DataType="viewModel:TabViewModel">
                 <TextBlock Text="{Binding Path=Title}" />
             </DataTemplate>
@@ -37,15 +38,20 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTextColumn IsReadOnly="True" Header="Имя параметра"
+                        <!-- Имя параметра -->
+                        <DataGridTextColumn IsReadOnly="True" Header="{Binding Source={StaticResource Lang}, XPath=h16}"
                                             Visibility="{Binding Path=Data.ParameterNameVisibility, Source={StaticResource BindingProxy}}"
                                             Binding="{Binding Path=ParameterName}"></DataGridTextColumn>
-                        <DataGridTextColumn IsReadOnly="True" Header="Имя типоразмера"
+                        <!-- Имя типоразмера -->
+                        <DataGridTextColumn IsReadOnly="True" Header="{Binding Source={StaticResource Lang}, XPath=h17}"
                                             Visibility="{Binding Path=Data.FamilyTypeVisibility, Source={StaticResource BindingProxy}}"
                                             Binding="{Binding Path=FamilyTypeName}"></DataGridTextColumn>
-                        <DataGridTextColumn IsReadOnly="True" Header="Исходное значение"
+                        <!-- Исходное значение -->
+                        <DataGridTextColumn IsReadOnly="True" Header="{Binding Source={StaticResource Lang}, XPath=h18}"
                                             Binding="{Binding Path=Source}"></DataGridTextColumn>
-                        <DataGridTextColumn IsReadOnly="True" Header="Результат" Width="*"
+                        <!-- Новое значение -->
+                        <DataGridTextColumn IsReadOnly="True" Header="{Binding Source={StaticResource Lang}, XPath=h19}"
+                                            Width="*"
                                             Binding="{Binding Path=Destination}"></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>

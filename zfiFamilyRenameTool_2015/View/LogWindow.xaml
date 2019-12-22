@@ -3,12 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:converters="clr-namespace:zfiFamilyRenameTool.ViewModel.Converters"
         xmlns:viewModel="clr-namespace:zfiFamilyRenameTool.ViewModel"
         xmlns:mps="https://modplus.org/winfx/xaml/controls"
-        mc:Ignorable="d"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
         d:DataContext="{d:DesignInstance Type=viewModel:LogWindowViewModel, IsDesignTimeCreatable=False}"
-        Title="LogWindow" Height="450" Width="450">
+        Height="450" Width="450">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
