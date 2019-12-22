@@ -23,6 +23,8 @@ namespace zfiFamilyRenameTool.Revit
         {
             try
             {
+                ModPlusAPI.Statistic.SendCommandStarting(ModPlusConnector.Instance);
+
                 if (RenamerWindow == null)
                 {
                     var mainVm = new MainViewModel(new RevitService(commandData.Application.Application, new RevitEvent()));

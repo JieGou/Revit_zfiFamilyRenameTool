@@ -175,6 +175,14 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="..\zfiFamilyRenameTool_2015\Resources\zfiFamilyRenameTool_16x16.png">
+      <Link>Resources\zfiFamilyRenameTool_16x16.png</Link>
+    </Resource>
+    <Resource Include="..\zfiFamilyRenameTool_2015\Resources\zfiFamilyRenameTool_32x32.png">
+      <Link>Resources\zfiFamilyRenameTool_32x32.png</Link>
+    </Resource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName) == Release (

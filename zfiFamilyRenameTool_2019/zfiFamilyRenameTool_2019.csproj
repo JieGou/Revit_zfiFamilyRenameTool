@@ -156,7 +156,11 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="..\zfifamilyrenametool_2015\resources\zfiFamilyRenameTool_16x16.png">
+      <Link>Resources\zfiFamilyRenameTool_16x16.png</Link>
+    </Resource>
+  </ItemGroup>
   <ItemGroup>
     <Page Include="..\zfiFamilyRenameTool_2015\View\Body.xaml">
       <Link>View\Body.xaml</Link>
@@ -174,6 +178,11 @@
       <Link>View\RenamerWindow.xaml</Link>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="..\zfifamilyrenametool_2015\resources\zfiFamilyRenameTool_32x32.png">
+      <Link>Resources\zfiFamilyRenameTool_32x32.png</Link>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -6,6 +6,10 @@
 
     public class ModPlusConnector : IModPlusFunctionInterface
     {
+        private static ModPlusConnector _instance;
+
+        public static ModPlusConnector Instance => _instance ?? (_instance = new ModPlusConnector());
+
         public SupportedProduct SupportedProduct => SupportedProduct.Revit;
 
         public string Name => "zfiFamilyRenameTool";
@@ -30,9 +34,9 @@
 
         public Guid AddInId => Guid.Empty;
 
-        public string LName => "Bla-bla";
+        public string LName => "Пакетное переименование в семействах";
 
-        public string Description => "Bla-bla-bla";
+        public string Description => "Пакетное переименование имен параметров, имен типов, значений параметров в указанных семействах";
 
         public string Author => "Жеков Фёдор";
 
@@ -40,7 +44,7 @@
 
         public bool CanAddToRibbon => true;
 
-        public string FullDescription => "Bla-bla-bla-bla";
+        public string FullDescription => "Плагин обрабатывает выбранные файлы или все файлы в выбранных папках. Можно добавлять префикс или суффикс, можно переименовывать с поиском и заменой. Присутствует несколько опций настройки поиска и замены. Присутствует возможность использовать регулярные выражения для поиска значений";
 
         public string ToolTipHelpImage => string.Empty;
 
