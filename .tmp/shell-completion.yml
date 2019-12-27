@@ -1,0 +1,25 @@
+Continue: 
+Help: 
+Host:
+- AppVeyor
+- AzurePipelines
+- Bamboo
+- Bitrise
+- Console
+- GitHubActions
+- GitLab
+- Jenkins
+- TeamCity
+- Travis
+NoLogo: 
+Plan: 
+Root: 
+Skip:
+- Compile
+Target:
+- Compile
+Verbosity:
+- Minimal
+- Normal
+- Quiet
+- Verbose

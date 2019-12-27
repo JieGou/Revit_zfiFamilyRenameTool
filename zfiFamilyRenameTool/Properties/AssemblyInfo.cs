@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+
 [assembly: AssemblyTitle("zfiFamilyRenameTool")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("modplus.org")]
