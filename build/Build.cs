@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using Nuke.Common;
@@ -26,16 +27,18 @@ class Build : NukeBuild
                 throw new FileNotFoundException("Not found!");
             
             var postBuild = Environment.GetEnvironmentVariable("ModPlusPostBuild");
-
+            var build = new List<string>();
             foreach (var (_, c) in project.Configurations)
             {
                 var configuration = c.Split("|")[0];
                 var platform = c.Split("|")[1];
 
-                Logger.Normal($"Configuration: {configuration}");
-
-                if (configuration == "Debug") 
+                if (configuration == "Debug" || build.Contains(configuration))
                     continue;
+
+                Logger.Normal($"Configuration: {configuration}");
+                
+                build.Add(configuration);
 
                 MSBuild(_ => _
                     .SetProjectFile(project.Path)

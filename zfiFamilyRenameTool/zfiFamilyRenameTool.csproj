@@ -33,31 +33,37 @@
     <OutputPath>bin\x64\R2015\</OutputPath>
     <DefineConstants>TRACE;R2015</DefineConstants>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <AssemblyName>$(AssemblyName)_2015</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'R2016|x64'">
     <OutputPath>bin\x64\R2016\</OutputPath>
     <DefineConstants>TRACE;R2016</DefineConstants>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <AssemblyName>$(AssemblyName)_2016</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'R2017|x64'">
     <OutputPath>bin\x64\R2017\</OutputPath>
     <DefineConstants>TRACE;R2017</DefineConstants>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <AssemblyName>$(AssemblyName)_2017</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'R2018|x64'">
     <OutputPath>bin\x64\R2018\</OutputPath>
     <DefineConstants>TRACE;R2018</DefineConstants>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <AssemblyName>$(AssemblyName)_2018</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'R2019|x64'">
     <OutputPath>bin\x64\R2019\</OutputPath>
     <DefineConstants>TRACE;R2019</DefineConstants>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <AssemblyName>$(AssemblyName)_2019</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'R2020|x64'">
     <OutputPath>bin\x64\R2020\</OutputPath>
     <DefineConstants>TRACE;R2020</DefineConstants>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <AssemblyName>$(AssemblyName)_2020</AssemblyName>
   </PropertyGroup>
   <PropertyGroup>
     <CodeAnalysisRuleSet>$(SolutionDir)\ModPlus.ruleset</CodeAnalysisRuleSet>
@@ -132,9 +138,6 @@
           <ExcludeAssets>runtime</ExcludeAssets>
         </PackageReference>
       </ItemGroup>
-      <PropertyGroup>
-        <AssemblyName>$(AssemblyName)_2015</AssemblyName>
-      </PropertyGroup>
     </When>
     <When Condition=" '$(Configuration)'=='R2016' ">
       <ItemGroup>
@@ -143,9 +146,6 @@
           <ExcludeAssets>runtime</ExcludeAssets>
         </PackageReference>
       </ItemGroup>
-      <PropertyGroup>
-        <AssemblyName>$(AssemblyName)_2016</AssemblyName>
-      </PropertyGroup>
     </When>
     <When Condition=" '$(Configuration)'=='R2017' ">
       <ItemGroup>
@@ -154,9 +154,6 @@
           <ExcludeAssets>runtime</ExcludeAssets>
         </PackageReference>
       </ItemGroup>
-      <PropertyGroup>
-        <AssemblyName>$(AssemblyName)_2017</AssemblyName>
-      </PropertyGroup>
     </When>
     <When Condition=" '$(Configuration)'=='R2018' ">
       <ItemGroup>
@@ -165,9 +162,6 @@
           <ExcludeAssets>runtime</ExcludeAssets>
         </PackageReference>
       </ItemGroup>
-      <PropertyGroup>
-        <AssemblyName>$(AssemblyName)_2018</AssemblyName>
-      </PropertyGroup>
     </When>
     <When Condition=" '$(Configuration)'=='R2019' ">
       <ItemGroup>
@@ -176,9 +170,6 @@
           <ExcludeAssets>runtime</ExcludeAssets>
         </PackageReference>
       </ItemGroup>
-      <PropertyGroup>
-        <AssemblyName>$(AssemblyName)_2019</AssemblyName>
-      </PropertyGroup>
     </When>
     <When Condition=" '$(Configuration)'=='R2020' or '$(Configuration)'=='Debug'">
       <ItemGroup>
@@ -187,9 +178,6 @@
           <ExcludeAssets>runtime</ExcludeAssets>
         </PackageReference>
       </ItemGroup>
-      <PropertyGroup>
-        <AssemblyName>$(AssemblyName)_2020</AssemblyName>
-      </PropertyGroup>
     </When>
   </Choose>
   <ItemGroup>
