@@ -99,7 +99,8 @@ namespace zfiFamilyRenameTool.Services
             {
                 new FamilyParametersProvider(),
                 new FamilyTypesProvider(),
-                new FamilyParameterValuesProvider()
+                new FamilyParameterValuesProvider(),
+                new FamilyIsInstanceParametersProvider()
             };
         }
 

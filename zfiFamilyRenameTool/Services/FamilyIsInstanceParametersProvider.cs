@@ -1,18 +1,19 @@
-namespace zfiFamilyRenameTool.Services
+﻿namespace zfiFamilyRenameTool.Services
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using Abstractions;
     using Autodesk.Revit.DB;
     using ModPlusAPI;
 
-    public class FamilyParametersProvider : IRenameableProvider
+    public class FamilyIsInstanceParametersProvider : IRenameableProvider
     {
-        // Имена параметров
-        public string Name => Language.GetItem(ModPlusConnector.Instance.Name, "p1");
+        /// <inheritdoc />
+        public string Name => Language.GetItem(ModPlusConnector.Instance.Name, "h24");
 
         /// <inheritdoc />
-        public TabItemType TabItemType => TabItemType.SourceAndDestination;
+        public TabItemType TabItemType => TabItemType.ParameterNameAndSourceAndDestinationAndFormula;
 
         public IEnumerable<IRenameable> GetRenameables(Document doc)
         {
@@ -23,15 +24,15 @@ namespace zfiFamilyRenameTool.Services
             }
 
             var fm = doc.FamilyManager;
-
+            
             foreach (FamilyParameter p in fm.Parameters)
             {
-                if (p.IsShared || p.IsReadOnly || p.Id.IntegerValue < 0)
+                if (p.Id.IntegerValue < 0)
                 {
                     continue;
                 }
-
-                yield return new FamilyParameterWrapper(p, doc);
+                
+                yield return new FamilyIsInstanceParameterWrapper(p, doc);
             }
         }
     }

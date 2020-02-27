@@ -7,6 +7,8 @@ namespace zfiFamilyRenameTool.Abstractions
     {
         string Name { get; }
 
+        TabItemType TabItemType { get; }
+
         IEnumerable<IRenameable> GetRenameables(Document doc);
     }
 }

@@ -11,6 +11,7 @@ namespace zfiFamilyRenameTool.ViewModel
     public class BodyViewModel : VmBase, IDisposable
     {
         private readonly RevitService _service;
+        private int _selectedTabIndex = -1;
 
         public BodyViewModel()
         {
@@ -29,6 +30,21 @@ namespace zfiFamilyRenameTool.ViewModel
         public IReadOnlyCollection<Document> Docs { get; }
 
         public IReadOnlyCollection<TabViewModel> Tabs { get; }
+
+        /// <summary>
+        /// Selected tab index
+        /// </summary>
+        public int SelectedTabIndex
+        {
+            get => _selectedTabIndex;
+            set
+            {
+                if (_selectedTabIndex == value)
+                    return;
+                _selectedTabIndex = value;
+                OnPropertyChanged();
+            }
+        }
 
         public void Dispose()
         {

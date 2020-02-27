@@ -15,12 +15,18 @@ namespace zfiFamilyRenameTool.Abstractions
         /// <summary>
         /// Новое значение
         /// </summary>
-        string Destination { get; set; }
+        string Destination { get; }
 
         /// <summary>
         /// Условие группировки
         /// </summary>
         string GroupCondition { get; }
+
+        /// <summary>
+        /// Установить новое значение для <see cref="Destination"/>
+        /// </summary>
+        /// <param name="value">Новое значение</param>
+        void SetNewDestination(string value);
 
         /// <summary>
         /// Переименовать

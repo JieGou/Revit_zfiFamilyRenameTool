@@ -15,10 +15,45 @@
                 <ResourceDictionary Source="pack://application:,,,/ModPlusStyle;component/Styles/Controls.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <XmlDataProvider x:Key="Lang" Source="E:/ModPlus/Languages/en-US.xml" XPath="ModPlus/zfiFamilyRenameTool" />
+
             <DataTemplate x:Key="TabHeaderTemplate" DataType="viewModel:TabViewModel">
                 <TextBlock Text="{Binding Path=Title}" />
             </DataTemplate>
-            <DataTemplate x:Key="TabContentTemplate" DataType="viewModel:TabViewModel">
+
+            <DataTemplate x:Key="SourceAndDestination"
+                          DataType="viewModel:TabViewModel">
+                <DataGrid ItemsSource="{Binding Path=Renameables}"
+                          AutoGenerateColumns="False" CanUserAddRows="False"
+                          CanUserDeleteRows="False" CanUserReorderColumns="False"
+                          CanUserSortColumns="True"
+                          mps:DataGridAssist.CellPadding="2 4" mps:DataGridAssist.ColumnHeaderPadding="2 4">
+                    <DataGrid.Resources>
+                        <view:BindingProxy x:Key="BindingProxy" Data="{Binding}"></view:BindingProxy>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.Header>
+                                <CheckBox IsChecked="{Binding Path=Data.AllSelected, Source={StaticResource BindingProxy}, UpdateSourceTrigger=PropertyChanged}" Margin="0" />
+                            </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate DataType="viewModel:RenameableViewModel">
+                                    <CheckBox IsChecked="{Binding Path=IsChecked, UpdateSourceTrigger=PropertyChanged}" Margin="0" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!-- Исходное значение -->
+                        <DataGridTextColumn IsReadOnly="True" Header="{Binding Source={StaticResource Lang}, XPath=h18}"
+                                            Binding="{Binding Path=Source}"></DataGridTextColumn>
+                        <!-- Новое значение -->
+                        <DataGridTextColumn IsReadOnly="True" Header="{Binding Source={StaticResource Lang}, XPath=h19}"
+                                            Width="*"
+                                            Binding="{Binding Path=Destination}"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DataTemplate>
+
+            <DataTemplate x:Key="ParameterNameAndSourceAndDestination"
+                          DataType="viewModel:TabViewModel">
                 <DataGrid ItemsSource="{Binding Path=Renameables}"
                           AutoGenerateColumns="False" CanUserAddRows="False"
                           CanUserDeleteRows="False" CanUserReorderColumns="False"
@@ -40,11 +75,44 @@
                         </DataGridTemplateColumn>
                         <!-- Имя параметра -->
                         <DataGridTextColumn IsReadOnly="True" Header="{Binding Source={StaticResource Lang}, XPath=h16}"
-                                            Visibility="{Binding Path=Data.ParameterNameVisibility, Source={StaticResource BindingProxy}}"
+                                            Binding="{Binding Path=ParameterName}"></DataGridTextColumn>
+                        <!-- Исходное значение -->
+                        <DataGridTextColumn IsReadOnly="True" Header="{Binding Source={StaticResource Lang}, XPath=h18}"
+                                            Binding="{Binding Path=Source}"></DataGridTextColumn>
+                        <!-- Новое значение -->
+                        <DataGridTextColumn IsReadOnly="True" Header="{Binding Source={StaticResource Lang}, XPath=h19}"
+                                            Width="*"
+                                            Binding="{Binding Path=Destination}"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DataTemplate>
+
+            <DataTemplate x:Key="ParameterNameAndTypeNameAndSourceAndDestination"
+                          DataType="viewModel:TabViewModel">
+                <DataGrid ItemsSource="{Binding Path=Renameables}"
+                          AutoGenerateColumns="False" CanUserAddRows="False"
+                          CanUserDeleteRows="False" CanUserReorderColumns="False"
+                          CanUserSortColumns="True"
+                          mps:DataGridAssist.CellPadding="2 4" mps:DataGridAssist.ColumnHeaderPadding="2 4">
+                    <DataGrid.Resources>
+                        <view:BindingProxy x:Key="BindingProxy" Data="{Binding}"></view:BindingProxy>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.Header>
+                                <CheckBox IsChecked="{Binding Path=Data.AllSelected, Source={StaticResource BindingProxy}, UpdateSourceTrigger=PropertyChanged}" Margin="0" />
+                            </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate DataType="viewModel:RenameableViewModel">
+                                    <CheckBox IsChecked="{Binding Path=IsChecked, UpdateSourceTrigger=PropertyChanged}" Margin="0" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!-- Имя параметра -->
+                        <DataGridTextColumn IsReadOnly="True" Header="{Binding Source={StaticResource Lang}, XPath=h16}"
                                             Binding="{Binding Path=ParameterName}"></DataGridTextColumn>
                         <!-- Имя типоразмера -->
                         <DataGridTextColumn IsReadOnly="True" Header="{Binding Source={StaticResource Lang}, XPath=h17}"
-                                            Visibility="{Binding Path=Data.FamilyTypeVisibility, Source={StaticResource BindingProxy}}"
                                             Binding="{Binding Path=FamilyTypeName}"></DataGridTextColumn>
                         <!-- Исходное значение -->
                         <DataGridTextColumn IsReadOnly="True" Header="{Binding Source={StaticResource Lang}, XPath=h18}"
@@ -56,13 +124,59 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </DataTemplate>
+
+            <DataTemplate x:Key="ParameterNameAndSourceAndDestinationAndFormula"
+                          DataType="viewModel:TabViewModel">
+                <DataGrid ItemsSource="{Binding Path=Renameables}"
+                          AutoGenerateColumns="False" CanUserAddRows="False"
+                          CanUserDeleteRows="False" CanUserReorderColumns="False"
+                          CanUserSortColumns="True"
+                          mps:DataGridAssist.CellPadding="2 4" mps:DataGridAssist.ColumnHeaderPadding="2 4">
+                    <DataGrid.Resources>
+                        <view:BindingProxy x:Key="BindingProxy" Data="{Binding}"></view:BindingProxy>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.Header>
+                                <CheckBox IsChecked="{Binding Path=Data.AllSelected, Source={StaticResource BindingProxy}, UpdateSourceTrigger=PropertyChanged}" Margin="0" />
+                            </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate DataType="viewModel:RenameableViewModel">
+                                    <CheckBox IsChecked="{Binding Path=IsChecked, UpdateSourceTrigger=PropertyChanged}" Margin="0" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!-- Имя параметра -->
+                        <DataGridTextColumn IsReadOnly="True" Header="{Binding Source={StaticResource Lang}, XPath=h16}"
+                                            Binding="{Binding Path=ParameterName}"></DataGridTextColumn>
+                        <!-- Исходное значение -->
+                        <DataGridTextColumn IsReadOnly="True" Header="{Binding Source={StaticResource Lang}, XPath=h18}"
+                                            Binding="{Binding Path=Source}"></DataGridTextColumn>
+                        <!-- Новое значение -->
+                        <DataGridTextColumn IsReadOnly="True" Header="{Binding Source={StaticResource Lang}, XPath=h19}"
+                                            Binding="{Binding Path=Destination}"></DataGridTextColumn>
+                        <!-- Formula -->
+                        <DataGridTemplateColumn IsReadOnly="True" Header="{Binding Source={StaticResource Lang}, XPath=h27}"
+                                            Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=ParameterFormula}"
+                                               ToolTip="{Binding Path=ParameterFormula}"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DataTemplate>
         </ResourceDictionary>
     </UserControl.Resources>
     <TabControl
         ItemsSource="{Binding Path=Tabs}" 
         ItemTemplate="{StaticResource TabHeaderTemplate}"
-        ContentTemplate="{StaticResource TabContentTemplate}"
-        SelectedIndex="0"
+        SelectedIndex="{Binding Path=SelectedTabIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         mps:ControlsAssist.HeaderFontSize="14">
+        <TabControl.ContentTemplateSelector>
+            <view:TabItemTemplateSelector />
+        </TabControl.ContentTemplateSelector>
     </TabControl>
 </UserControl>

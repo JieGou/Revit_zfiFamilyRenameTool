@@ -17,15 +17,21 @@ namespace zfiFamilyRenameTool.Services
             // Параметр \"{_parameter.Definition.Name}\"
             Title = string.Format(Language.GetItem(ModPlusConnector.Instance.Name, "p5"), parameter.Definition.Name);
             Source = _parameter.Definition.Name;
+            Destination = string.Empty;
         }
 
         public string Title { get; }
 
         public string Source { get; }
 
-        public string Destination { get; set; } = string.Empty;
+        public string Destination { get; private set; }
 
         public string GroupCondition => Source;
+
+        public void SetNewDestination(string value)
+        {
+            Destination = value;
+        }
 
         public void Rename()
         {

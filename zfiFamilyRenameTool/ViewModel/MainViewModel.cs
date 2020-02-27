@@ -1,6 +1,7 @@
 namespace zfiFamilyRenameTool.ViewModel
 {
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Windows.Input;
     using Abstractions;
     using ModPlusAPI;
@@ -52,6 +53,8 @@ namespace zfiFamilyRenameTool.ViewModel
             }
 
             Body = new BodyViewModel(_service, docs, Options);
+            Body.PropertyChanged += BodyOnPropertyChanged;
+            Body.SelectedTabIndex = 0;
 
             RenamerCommand.RenamerWindow.Activate();
         }
@@ -70,7 +73,11 @@ namespace zfiFamilyRenameTool.ViewModel
         private void Close(ICloseable closeable)
         {
             closeable.Close();
-            Body?.Dispose();
+            if (Body != null)
+            {
+                Body.PropertyChanged -= BodyOnPropertyChanged;
+                Body.Dispose();
+            }
         }
 
         private void ApplyAndShowLogs()
@@ -98,6 +105,14 @@ namespace zfiFamilyRenameTool.ViewModel
             _service.SaveAllDocs(_body.Docs);
             _service.Renamed -= SaveAnShowLogs;
             Body.ReloadRenameables();
+        }
+
+        private void BodyOnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "SelectedTabIndex")
+            {
+                Options.IsEnable = Body.SelectedTabIndex != 3;
+            }
         }
     }
 }

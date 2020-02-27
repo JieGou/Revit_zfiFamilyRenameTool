@@ -18,15 +18,21 @@
             // Типоразмер \"{familyType.Name}\"
             Title = string.Format(Language.GetItem(ModPlusConnector.Instance.Name, "p5"), familyType.Name);
             Source = familyType.Name;
+            Destination = string.Empty;
         }
 
         public string Title { get; }
 
         public string Source { get; }
 
-        public string Destination { get; set; }
+        public string Destination { get; private set; }
 
         public string GroupCondition => Source;
+
+        public void SetNewDestination(string value)
+        {
+            Destination = value;
+        }
 
         public void Rename()
         {

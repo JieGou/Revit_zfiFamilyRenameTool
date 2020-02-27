@@ -6,7 +6,6 @@ namespace zfiFamilyRenameTool.ViewModel
     using Abstractions;
     using Autodesk.Revit.DB;
     using ModPlusAPI.Mvvm;
-    using Services;
 
     public class TabViewModel : VmBase
     {
@@ -21,17 +20,6 @@ namespace zfiFamilyRenameTool.ViewModel
             _docs = docs;
             _optionsViewModel = optionsViewModel;
 
-            if (provider is FamilyParameterValuesProvider)
-            {
-                ParameterNameVisibility = System.Windows.Visibility.Visible;
-                FamilyTypeVisibility = System.Windows.Visibility.Visible;
-            }
-            else
-            {
-                ParameterNameVisibility = System.Windows.Visibility.Collapsed;
-                FamilyTypeVisibility = System.Windows.Visibility.Collapsed;
-            }
-
             Renameables = new ObservableCollection<RenameableViewModel>();
 
             FillRenameables();
@@ -43,10 +31,8 @@ namespace zfiFamilyRenameTool.ViewModel
 
         public string Title => _provider.Name;
 
-        public System.Windows.Visibility ParameterNameVisibility { get; set; }
-
-        public System.Windows.Visibility FamilyTypeVisibility { get; set; }
-
+        public TabItemType TabItemType => _provider.TabItemType;
+        
         public bool AllSelected
         {
             get => _allSelected;
@@ -81,9 +67,10 @@ namespace zfiFamilyRenameTool.ViewModel
         private void FillRenameables()
         {
             var renameables = new List<IRenameable>();
+            var ordinalStringComparer = new ModPlusAPI.IO.OrdinalStringComparer();
             foreach (var doc in _docs)
             {
-                renameables.AddRange(_provider.GetRenameables(doc));
+                renameables.AddRange(_provider.GetRenameables(doc).OrderBy(r => r.GroupCondition, ordinalStringComparer));
             }
 
             foreach (var renameableVm in renameables

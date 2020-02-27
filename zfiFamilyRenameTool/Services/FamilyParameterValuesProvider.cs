@@ -11,6 +11,8 @@
         // Значения параметров
         public string Name => Language.GetItem(ModPlusConnector.Instance.Name, "p2");
 
+        public TabItemType TabItemType => TabItemType.ParameterNameAndTypeNameAndSourceAndDestination;
+
         public IEnumerable<IRenameable> GetRenameables(Document doc)
         {
             if (!doc.IsFamilyDocument)

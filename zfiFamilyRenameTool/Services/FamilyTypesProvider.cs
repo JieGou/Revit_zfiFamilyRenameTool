@@ -11,6 +11,8 @@
         // Имена типоразмеров
         public string Name => Language.GetItem(ModPlusConnector.Instance.Name, "p3");
 
+        public TabItemType TabItemType => TabItemType.SourceAndDestination;
+
         public IEnumerable<IRenameable> GetRenameables(Document doc)
         {
             if (!doc.IsFamilyDocument)

@@ -23,23 +23,18 @@ namespace zfiFamilyRenameTool.ViewModel
 
         public string Source => _renameable.First().Source;
 
-        public string Destination
-        {
-            get => _renameable.First().Destination;
-            set
-            {
-                _renameable.ForEach(x => x.Destination = value);
-                OnPropertyChanged();
-            }
-        }
+        public string Destination => _renameable.First().Destination;
 
         public string ParameterName
         {
             get
             {
+                //// TODO Переделать
                 var r = _renameable.FirstOrDefault();
                 if (r is FamilyParameterValueWrapper v)
                     return v.ParameterName;
+                if (r is FamilyIsInstanceParameterWrapper i)
+                    return i.ParameterName;
                 return null;
             }
         }
@@ -55,6 +50,17 @@ namespace zfiFamilyRenameTool.ViewModel
             }
         }
 
+        public string ParameterFormula
+        {
+            get
+            {
+                var r = _renameable.FirstOrDefault();
+                if (r is FamilyIsInstanceParameterWrapper v)
+                    return v.ParameterFormula;
+                return null;
+            }
+        }
+
         public string GroupCondition => _renameable.First().GroupCondition;
 
         public bool IsChecked
@@ -65,12 +71,18 @@ namespace zfiFamilyRenameTool.ViewModel
                 _isChecked = value;
                 if (!_isChecked)
                 {
-                    Destination = string.Empty;
+                    SetNewDestination(string.Empty);
                 }
 
                 OnChecked(value);
                 OnPropertyChanged();
             }
+        }
+
+        public void SetNewDestination(string value)
+        {
+            _renameable.ForEach(x => x.SetNewDestination(value));
+            OnPropertyChanged(nameof(Destination));
         }
 
         public void Rename()

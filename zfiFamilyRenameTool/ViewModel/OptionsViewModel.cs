@@ -8,6 +8,7 @@ namespace zfiFamilyRenameTool.ViewModel
 
     public class OptionsViewModel : VmBase
     {
+        private bool _isEnable;
         private RenameOption _currentRenameOption = RenameOption.StartWith;
         private bool _isCaseSensitive;
         private string _find = string.Empty;
@@ -16,6 +17,21 @@ namespace zfiFamilyRenameTool.ViewModel
         private string _suffix = string.Empty;
 
         public ICommand OptionCheckedCmd => new RelayCommand<string>(OptionChecked);
+
+        /// <summary>
+        /// Is enable control in UI
+        /// </summary>
+        public bool IsEnable
+        {
+            get => _isEnable;
+            set
+            {
+                if (_isEnable == value)
+                    return;
+                _isEnable = value;
+                OnPropertyChanged();
+            }
+        }
 
         public bool IsCaseSensitive
         {
@@ -72,7 +88,7 @@ namespace zfiFamilyRenameTool.ViewModel
             get
             {
                 Func<IRenameable, string> func = i => i.Source;
-
+                
                 if (!string.IsNullOrEmpty(Find))
                 {
                     switch (_currentRenameOption)
@@ -134,7 +150,7 @@ namespace zfiFamilyRenameTool.ViewModel
                     func = i => oldFunc(i) + Suffix;
                 }
 
-                return i => i.Destination = i.CanRename() ? func(i) : i.Source;
+                return i => i.SetNewDestination(i.CanRename() ? func(i) : i.Source);
             }
         }
 

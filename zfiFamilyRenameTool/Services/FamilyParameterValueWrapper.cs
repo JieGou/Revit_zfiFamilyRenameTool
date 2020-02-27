@@ -39,8 +39,11 @@
 
                     break;
             }
+
+            Destination = string.Empty;
         }
 
+        /// <inheritdoc />
         public string Title { get; }
 
         public string ParameterName { get; }
@@ -53,6 +56,11 @@
 
         public string GroupCondition => $"{ParameterName}.{FamilyTypeName}.{Source}";
 
+        public void SetNewDestination(string value)
+        {
+            Destination = value;
+        }
+
         public void Rename()
         {
             using (var t = new Transaction(_doc, $"Rename {ParameterName} parameter value"))
@@ -64,7 +72,7 @@
                 {
                     case StorageType.Double:
                         if (double.TryParse(Destination.Replace(",", "."), NumberStyles.Number, CultureInfo.InvariantCulture, out var d))
-                            fm.Set(_parameter, d);
+                            fm.Set(_parameter, UnitUtils.ConvertToInternalUnits(d, _parameter.DisplayUnitType));
                         break;
                     case StorageType.String:
                         fm.Set(_parameter, Destination);
